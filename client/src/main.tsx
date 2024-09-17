@@ -4,10 +4,10 @@ import './index.css';
 
 import App from './App.tsx';
 
-import Error from './pages/ErrorPage.tsx';
-import Home from './pages/Home.tsx';
-import Login from './pages/Login.tsx';
-import Playlist from './pages/Playlist.tsx';
+import Error from '../pages/ErrorPage.tsx';
+import Home from '../pages/Home.tsx';
+import Login from '../pages/Login.tsx';
+import Playlist from '../pages/Playlist.tsx';
 import React from 'react';
 
 const router = createBrowserRouter([
