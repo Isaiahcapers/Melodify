@@ -1,22 +1,44 @@
 import { Link, useLocation } from "react-router-dom";
 
-const Navigation = () => {
-  const location = useLocation();
+interface NavigationLinks {
+  to: string;
+  pageTitle: string;
+}
 
+const ListItems = (props: NavigationLinks & { isActive: boolean }) => {
   return (
-    <nav>
-      <ul>
-        <li>
-          <Link to="/" className={location.pathname === "/" ? "active" : ""}>
-            Home Page
-          </Link>
-        </li>
-        <li>
-          <Link to="/about" className={location.pathname === "/playlist" ? "active" : ""}>
-            Playlist
-          </Link>
-        </li>
-      </ul>
-    </nav>
+    <li className={`nav-button {props.isActive ? 'active' : ''}`}>
+      <Link to={props.to}>{props.pageTitle}</Link>
+    </li>
   );
 };
+
+export default function Navigation() {
+  const currentTab = useLocation().pathname;
+
+
+
+  const navLinks = [
+
+    { pageTitle: 'Home Page', path: '/' },
+    { pageTitle: 'Playlist', path: '/playlist' },
+
+  ];
+
+  return (
+    <>
+      <ul className="nav-css">
+        {
+          navLinks.map((navLinks) => (
+            <ListItems
+              key={navLinks.pageTitle}
+              to={navLinks.path}
+              pageTitle={navLinks.pageTitle}
+              isActive={currentTab === navLinks.path} />
+          ))
+        }
+      </ul>
+
+    </>
+  );
+}
