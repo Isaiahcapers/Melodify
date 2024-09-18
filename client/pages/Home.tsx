@@ -1,4 +1,3 @@
-import ErrorPage from "./ErrorPage";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -7,15 +6,16 @@ const Home = () => {
   const params = new URLSearchParams(window.location.search);
   const code = params.get("code");
 
-  if (!code) {
-    redirectToAuthCodeFlow(clientId);
-  } else {
-    const accessToken = await getAccessToken(clientId, code);
-    const profile = await fetchProfile(accessToken);
-    console.log(profile);
-    populateUI(profile);
-  }
-
+  (async () => {
+    if (!code) {
+      redirectToAuthCodeFlow(clientId);
+    } else {
+      const accessToken = await getAccessToken(clientId, code);
+      const profile = await fetchProfile(accessToken);
+      console.log(profile);
+      populateUI(profile);
+    }
+  })();
   async function redirectToAuthCodeFlow(clientId: string) {
     // TODO: Redirect to Spotify authorization page
     const verifier = generateCodeVerifier(128);
@@ -108,10 +108,10 @@ const Home = () => {
       </h2>
       <span id="avatar"></span>
       <ul>
-        <li>Email</li>
+        <li><span></span>Email</li>
         <li>User Id:</li>
       </ul>
     </div>
   );
 };
-export default Home;
+export default Home ;
