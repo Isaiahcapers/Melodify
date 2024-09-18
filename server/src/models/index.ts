@@ -1,6 +1,3 @@
-import sequelize from '../../config/connection.js';
-
-
-
+import sequelize from '../config/connection.js';
 
 export {  };

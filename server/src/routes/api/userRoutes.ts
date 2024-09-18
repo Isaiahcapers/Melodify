@@ -5,8 +5,8 @@ const router = Router();
 /**
  * GET /users - Fetch all users (dummy route)
  */
-router.get('/', (req, res) => {
+router.get('/', (_req, res) => {
   res.json({ users: [{ id: 1, username: 'admin' }] });
 });
 
-export default router;
+export { router as userRouter }; // Export the router as userRouter
