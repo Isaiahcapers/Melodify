@@ -1,17 +1,41 @@
-import { Sequelize } from 'sequelize';
-import dotenv from 'dotenv';
+// models/user.ts
+import { DataTypes, Model } from 'sequelize';
+import { sequelize } from '../config/connection'; // Centralized Sequelize connection
 
-dotenv.config();
+// Define the User model
+class User extends Model {
+  public id!: number;
+  public username!: string;
+  public password!: string;
 
-// Initialize the Sequelize instance using environment variables from .env
-const sequelize = new Sequelize(
-  process.env.DB_NAME || '',
-  process.env.DB_USER || '',
-  process.env.DB_PASSWORD || '',
+  public readonly createdAt!: Date;
+  public readonly updatedAt!: Date;
+}
+
+// Initialize the User model
+User.init(
   {
-    host: process.env.DB_HOST || 'localhost',
-    dialect: 'postgres', // Replace with your specific dialect: mysql, sqlite, etc.
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+  },
+  {
+    sequelize, // Pass the centralized sequelize instance
+    modelName: 'User',
+    tableName: 'users',
+    timestamps: true,
   }
 );
 
-export default sequelize;
+export { User };
