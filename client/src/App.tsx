@@ -1,19 +1,16 @@
-import {Outlet} from 'react-router-dom';
-// import Navbar from './components/Navbar';
-// import Footbar from './components/Footer';
+import React from "react";
+import { Outlet } from "react-router-dom";
+import Navbar from "./components/Navigation"; // Assuming this is the correct path for your Navbar
+import "./App.css";
 
-import './App.css'
-
-function App() {
-
+const App: React.FC = () => {
   return (
-  <div>
-    <Navbar/>
-    <main>
+    <div>
+      <Navbar /> {/* Navigation is now used */}
+      {/* Other components and routing logic */}
       <Outlet />
-    </main>
-  </div>
-  )
-}
+    </div>
+  );
+};
 
-export default App
+export default App;

@@ -29,4 +29,4 @@ router.post('/login', (req, res) => {
   return res.json({ success: true, message: 'Login successful', userId: user.id });
 });
 
-export default router;
+export {router as loginRouter}; // Exporting the router as loginRouter

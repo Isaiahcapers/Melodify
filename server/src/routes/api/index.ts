@@ -1,7 +1,8 @@
 import { Router } from 'express';
-import apiRoutes from './api/index.js';
+import { loginRouter } from './authRoutes.js';
+
 const router = Router();
 
-router.use('/api', apiRoutes);
+router.use('/auth', loginRouter); // Mounting the login router on the /api path
 
 export default router;
