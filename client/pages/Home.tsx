@@ -1,8 +1,8 @@
-import dotenv from "dotenv";
-dotenv.config();
+// import dotenv from "dotenv";
+// dotenv.config();
 
 const Home = () => {
-  const clientId = process.env.CLIENT_ID || ''; 
+  const clientId = import.meta.env.VITE_CLIENT_ID || ''; 
   const params = new URLSearchParams(window.location.search);
   const code = params.get("code");
 
@@ -26,7 +26,7 @@ const Home = () => {
     const params = new URLSearchParams();
     params.append("client_id", clientId);
     params.append("response_type", "code");
-    params.append("redirect_uri", "http://localhost:5173/callback");
+    params.append("redirect_uri", "http://localhost:3000/");
     params.append("scope", "user-read-private user-read-email");
     params.append("code_challenge_method", "S256");
     params.append("code_challenge", challenge);
@@ -60,8 +60,9 @@ const Home = () => {
     params.append("client_id", clientId);
     params.append("grant_type", "authorization_code");
     params.append("code", code);
-    params.append("redirect_uri", "http://localhost:5173/callback");
+    params.append("redirect_uri", "http://localhost:3000/");
     params.append("code_verifier", verifier!);
+console.log(params);
 
     const result = await fetch("https://accounts.spotify.com/api/token", {
         method: "POST",
@@ -104,12 +105,12 @@ const Home = () => {
     <div id="profile">
       <h1>Welcome to Melodify </h1>
       <h2>
-        Logged in as <span id="displayName"></span>{" "}
+        Logged in as <span id="displayName"></span>
       </h2>
       <span id="avatar"></span>
       <ul>
-        <li><span></span>Email</li>
-        <li>User Id:</li>
+        <li>User ID: <span id="id"></span></li>
+        <li>Email: <span id="email"></span></li>
       </ul>
     </div>
   );
