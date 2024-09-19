@@ -1,7 +1,7 @@
 import { useState } from "react";
 import LoginForm from "../components/LoginForm";
 import RegisterForm from "../components/RegisterForm";
-import '../pages/Login.css'; // CSS for styling
+import '../CSS/Login.css'; // CSS for styling
 
 const Login = () => {
   const [isRegister, setIsRegister] = useState(false);
