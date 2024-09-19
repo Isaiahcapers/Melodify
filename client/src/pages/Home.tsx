@@ -1,7 +1,11 @@
+import React, { useState, useEffect } from 'react';
+
 const Home = () => {
   const clientId = import.meta.env.VITE_CLIENT_ID || ''; 
   const params = new URLSearchParams(window.location.search);
   const code = params.get("code");
+  const [playlists, setPlaylists] = useState<any[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   (async () => {
     if (!code) {
@@ -96,6 +100,30 @@ console.log(params);
     document.getElementById("imgUrl")!.innerText = profile.images[0]?.url ?? '(no profile image)';
   }
 
+async function getFeaturedPlayslist(token: string) {
+  const result = await fetch("https://api.spotify.com/v1/browse/featured-playlists", {
+    method: "GET",
+    headers: { Authorization: `Bearer ${token}` }
+  });
+
+  useEffect(() => {
+    const fetchPlaylists = async () => {
+      try {
+        const token = await getAccessToken(clientId, code!);
+        const data = await getFeaturedPlayslist(token);
+        setPlaylists(data.playlists.items);
+      } catch (error) {
+        console.error('Error fetching playlists:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPlaylists();
+  }, [clientId, code]);
+
+  return await result.json();
+}
   return (
     <>
     <div id="profile">
@@ -113,7 +141,22 @@ console.log(params);
       </ul>
     </div>
     <div>
-      
+      {/* to category display api call */}
+      <h1>Featured Playlists</h1>
+      <div id="featured-playlists">
+          {loading ? (
+            <p>Loading...</p>
+          ) : (
+            <ul>
+              {playlists.map((playlist: any) => (
+                <li key={playlist.id}>
+                  <a href={playlist.external_urls.spotify}>{playlist.name}</a>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+
     </div>
     </>
   );
