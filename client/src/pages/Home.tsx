@@ -1,7 +1,11 @@
+import React, { useState, useEffect } from 'react';
+
 const Home = () => {
-  const clientId = import.meta.env.VITE_CLIENT_ID || ''; 
+  const clientId = import.meta.env.VITE_CLIENT_ID || '';
   const params = new URLSearchParams(window.location.search);
   const code = params.get("code");
+  const [playlists, setPlaylists] = useState<any[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   (async () => {
     if (!code) {
@@ -13,7 +17,7 @@ const Home = () => {
       populateUI(profile);
     }
   })();
-  
+
   async function redirectToAuthCodeFlow(clientId: string) {
     const verifier = generateCodeVerifier(128);
     const challenge = await generateCodeChallenge(verifier);
@@ -36,7 +40,7 @@ const Home = () => {
     let possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
     for (let i = 0; i < length; i++) {
-        text += possible.charAt(Math.floor(Math.random() * possible.length));
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
     }
     return text;
   }
@@ -45,9 +49,9 @@ const Home = () => {
     const data = new TextEncoder().encode(codeVerifier);
     const digest = await window.crypto.subtle.digest('SHA-256', data);
     return btoa(String.fromCharCode.apply(null, [...new Uint8Array(digest)]))
-        .replace(/\+/g, '-')
-        .replace(/\//g, '_')
-        .replace(/=+$/, '');
+      .replace(/\+/g, '-')
+      .replace(/\//g, '_')
+      .replace(/=+$/, '');
   }
 
   async function getAccessToken(clientId: string, code: string) {
@@ -59,12 +63,12 @@ const Home = () => {
     params.append("code", code);
     params.append("redirect_uri", "http://localhost:3000/");
     params.append("code_verifier", verifier!);
-console.log(params);
+    console.log(params);
 
     const result = await fetch("https://accounts.spotify.com/api/token", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: params
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: params
     });
 
     const { access_token } = await result.json();
@@ -73,8 +77,8 @@ console.log(params);
 
   async function fetchProfile(token: string): Promise<any> {
     const result = await fetch("https://api.spotify.com/v1/me", {
-        method: "GET", 
-        headers: { Authorization: `Bearer ${token}` }
+      method: "GET",
+      headers: { Authorization: `Bearer ${token}` }
     });
 
     return await result.json();
@@ -83,9 +87,9 @@ console.log(params);
   function populateUI(profile: any) {
     document.getElementById("displayName")!.innerText = profile.display_name;
     if (profile.images[0]) {
-        const profileImage = new Image(200, 200);
-        profileImage.src = profile.images[0].url;
-        document.getElementById("avatar")!.appendChild(profileImage);
+      const profileImage = new Image(200, 200);
+      profileImage.src = profile.images[0].url;
+      document.getElementById("avatar")!.appendChild(profileImage);
     }
     document.getElementById("id")!.innerText = profile.id;
     document.getElementById("email")!.innerText = profile.email;
@@ -96,6 +100,30 @@ console.log(params);
     document.getElementById("imgUrl")!.innerText = profile.images[0]?.url ?? '(no profile image)';
   }
 
+async function getFeaturedPlayslist(token: string) {
+  const result = await fetch("https://api.spotify.com/v1/browse/featured-playlists", {
+    method: "GET",
+    headers: { Authorization: `Bearer ${token}` }
+  });
+
+  useEffect(() => {
+    const fetchPlaylists = async () => {
+      try {
+        const token = await getAccessToken(clientId, code!);
+        const data = await getFeaturedPlayslist(token);
+        setPlaylists(data.playlists.items);
+      } catch (error) {
+        console.error('Error fetching playlists:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPlaylists();
+  }, [clientId, code]);
+
+  return await result.json();
+}
   return (
     <>
     <div id="profile">
@@ -113,7 +141,22 @@ console.log(params);
       </ul>
     </div>
     <div>
-      
+      {/* to category display api call */}
+      <h1>Featured Playlists</h1>
+      <div id="featured-playlists">
+          {loading ? (
+            <p>Loading...</p>
+          ) : (
+            <ul>
+              {playlists.map((playlist: any) => (
+                <li key={playlist.id}>
+                  <a href={playlist.external_urls.spotify}>{playlist.name}</a>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+
     </div>
     </>
   );

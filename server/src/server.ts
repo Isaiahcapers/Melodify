@@ -26,7 +26,7 @@ app.use((err: Error, _req: express.Request, res: express.Response, _next: expres
 });
 
 // Database sync and server start
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 3001;
 
 sequelize.sync().then(() => {
   app.listen(PORT, () => {

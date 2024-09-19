@@ -1,5 +1,5 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import '../components/Navigation.css';
+import '../CSS/Navigation.css';
 import { useEffect, useState } from "react";
 
 interface NavigationLinks {
@@ -43,7 +43,7 @@ export default function Navigation() {
   };
 
   const navLinks = [
-    { pageTitle: 'Home Page', path: '/' },
+    { pageTitle: 'Home Page', path: '/home' },
     { pageTitle: 'Playlist', path: '/playlist' },
   ];
 
