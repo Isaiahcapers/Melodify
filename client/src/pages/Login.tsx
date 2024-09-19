@@ -12,8 +12,9 @@ const Login = () => {
 
   return (
     <div className="login-container">
+      {/* Move the title above the logo */}
+      <h2>{isRegister ? "Register Page" : "Melodify"}</h2>
       <img src="/src/assets/images/melodify-logo2.png" alt="Melodify Logo" className="logo" />
-      <h2>{isRegister ? "Register Page" : "Login Page"}</h2>
       <div>
         {/* Toggle between Login and Register forms */}
         {isRegister ? <RegisterForm /> : <LoginForm />}

@@ -56,7 +56,7 @@ const LoginForm = () => {
 
   return (
     <form onSubmit={handleSubmit} className="login-form">
-      <h4 className="login-title">Login</h4>
+      <h4 className="login-title">Ready to start your Journey?</h4>
       <div className="form-group">
         <input
           type="text"

@@ -19,6 +19,33 @@
   display: block;
   width: 100px;
   margin: 0 auto 20px auto; /* Center the logo and add space below */
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Trigger the bounce on hover */
+.logo:hover {
+  animation: bounce 0.3s ease-in-out, throb 1.5s infinite 0.3s; /* Bounce first, then throb continuously */
+  transform: translateY(-10px); /* Hover position slightly above the default */
+}
+
+/* Keyframes for the bounce effect */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0); /* Start and end at normal position */
+  }
+  50% {
+    transform: translateY(-30px); /* Move up by 30px during the bounce */
+  }
+}
+
+/* Keyframes for the throb effect (slight pulsing) */
+@keyframes throb {
+  0%, 100% {
+    transform: scale(1) translateY(-10px); /* Keep the image slightly above its default position */
+  }
+  50% {
+    transform: scale(1.1) translateY(-10px); /* Slightly expand and stay above */
+  }
 }
 
 .login-container .form-group {
@@ -38,10 +65,11 @@
   border-radius: 5px;
 }
 
+/* Updated button color to match the teal from the logo */
 .login-container button {
   width: 100%;
   padding: 10px;
-  background-color: #4CAF50;
+  background-color: #008080; /* Teal color */
   color: white;
   border: none;
   border-radius: 5px;
@@ -49,7 +77,7 @@
 }
 
 .login-container button:hover {
-  background-color: #45a049;
+  background-color: #006666; /* Darker teal on hover */
 }
 
 /* Added styles */
@@ -61,11 +89,12 @@
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
 
+/* Updated toggle button color to match the teal */
 .toggle-button {
   width: 100%;
   padding: 10px;
   margin-top: 15px;
-  background-color: #4caf50;
+  background-color: #008080; /* Teal color */
   color: white;
   border: none;
   border-radius: 5px;
@@ -73,5 +102,13 @@
 }
 
 .toggle-button:hover {
-  background-color: #45a049;
+  background-color: #006666; /* Darker teal on hover */
+}
+
+/* Styling for the message under the logo */
+.login-message {
+  text-align: center;
+  margin: 15px 0;
+  font-size: 16px;
+  color: #333; /* You can change the color based on preference */
 }
