@@ -1,14 +1,15 @@
-// src/components/RegisterForm.tsx
-
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const RegisterForm = () => {
   const [formData, setFormData] = useState({
     username: "",
-    email: "", // Add email field
+    email: "",
     password: "",
     confirmPassword: "",
   });
+
+  const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -25,8 +26,6 @@ const RegisterForm = () => {
       return;
     }
 
-    console.log("Submitting form data:", formData);
-
     try {
       const response = await fetch("/api/auth/register", {
         method: "POST",
@@ -35,15 +34,14 @@ const RegisterForm = () => {
         },
         body: JSON.stringify({
           username: formData.username,
-          email: formData.email, // Send email to API
+          email: formData.email,
           password: formData.password,
         }),
       });
 
-      console.log("Response status:", response.status);
-
       if (response.ok) {
         alert("User registered successfully!");
+        navigate("/login"); // Redirect to login page after successful registration
       } else {
         const errorData = await response.json();
         alert(`Registration failed: ${errorData.message}`);

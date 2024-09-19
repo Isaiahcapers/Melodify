@@ -1,12 +1,11 @@
-import ReactDOM from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createRoot } from "react-dom/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom"; // Add RouterProvider here
 import "./index.css";
 
-import App from "./App.tsx";
-import Error from "./pages/ErrorPage.tsx";
-import Home from "./pages/Home.tsx";
-import Login from "./pages/Login.tsx";  // Make sure this path is correct
-import Playlist from "./pages/Playlist.tsx";
+import App from "./App";
+import Error from "./pages/ErrorPage";
+import Login from "./pages/Login";  // Start at login
+import Playlist from "./pages/Playlist";
 
 const router = createBrowserRouter([
   {
@@ -16,12 +15,11 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <App />,
-        // element: <Home />, 
+        element: <Login />,  // Set login as the default route when user visits "/"
       },
       {
         path: "/login",
-        element: <Login />,  // Ensure this route exists for the Login page
+        element: <Login />,  // Direct /login route as well
       },
       {
         path: "/playlist",
@@ -33,5 +31,5 @@ const router = createBrowserRouter([
 
 const rootElement = document.getElementById("root");
 if (rootElement) {
-  ReactDOM.createRoot(rootElement).render(<RouterProvider router={router} />);
+  createRoot(rootElement).render(<RouterProvider router={router} />); // Now RouterProvider is recognized
 }

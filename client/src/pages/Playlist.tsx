@@ -5,5 +5,4 @@ const playlist = () => {
     </div>
   );
 };
-
 export default playlist;
