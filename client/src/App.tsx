@@ -10,6 +10,7 @@ import Playlist from './pages/Playlist'; // Assuming you have a Playlist compone
 import MelodifyCallback from './pages/MelodifyCallback'; // Corrected the import statement
 
 import "./App.css"; // Assuming you have global styles here
+import Home from './pages/Home';
 
 const App: React.FC = () => {
   return (
@@ -25,6 +26,7 @@ const App: React.FC = () => {
         {/* Protect the routes */}
         <Route path="/" element={<ProtectedRoute><HomePage /></ProtectedRoute>} />
         <Route path="/playlist" element={<ProtectedRoute><Playlist /></ProtectedRoute>} />
+        <Route path='/home' element={<Home/>}/>
       </Routes>
     </div>
   );

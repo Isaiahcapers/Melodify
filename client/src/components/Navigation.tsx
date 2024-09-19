@@ -43,7 +43,7 @@ export default function Navigation() {
   };
 
   const navLinks = [
-    { pageTitle: 'Home Page', path: '/' },
+    { pageTitle: 'Home Page', path: '/home' },
     { pageTitle: 'Playlist', path: '/playlist' },
   ];
 

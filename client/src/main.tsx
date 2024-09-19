@@ -6,7 +6,7 @@ import App from "./App";
 import Error from "./pages/ErrorPage";
 import Login from "./pages/Login";  // Start at login
 import Playlist from "./pages/Playlist";
-
+import Home from "./pages/Home";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -25,6 +25,10 @@ const router = createBrowserRouter([
         path: "/playlist",
         element: <Playlist />,
       },
+      {
+        path: "/home",
+        element: <Home />,
+      }
     ],
   },
 ]);
