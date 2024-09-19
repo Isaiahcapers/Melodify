@@ -1,5 +1,5 @@
 import { createRoot } from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom"; // Add RouterProvider here
+import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom"; // Add Navigate to handle default redirection
 import "./index.css";
 
 import App from "./App";
@@ -15,11 +15,11 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Login />,  // Set login as the default route when user visits "/"
+        element: <Navigate to="/login" replace />,  // Redirect to /login by default
       },
       {
         path: "/login",
-        element: <Login />,  // Direct /login route as well
+        element: <Login />,  // Direct /login route
       },
       {
         path: "/playlist",
@@ -35,5 +35,5 @@ const router = createBrowserRouter([
 
 const rootElement = document.getElementById("root");
 if (rootElement) {
-  createRoot(rootElement).render(<RouterProvider router={router} />); // Now RouterProvider is recognized
+  createRoot(rootElement).render(<RouterProvider router={router} />);
 }
