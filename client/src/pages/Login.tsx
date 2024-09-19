@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import LoginForm from "../components/LoginForm";
 import RegisterForm from "../components/RegisterForm";
-import "../pages/Login.css"; // CSS for styling
+import "../CSS/Login.css"; // CSS for styling
 
 // Import chart.js components
 import { Chart, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from "chart.js";
