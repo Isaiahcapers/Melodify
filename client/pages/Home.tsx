@@ -102,6 +102,7 @@ console.log(params);
   }
 
   return (
+    <>
     <div id="profile">
       <h1>Welcome to Melodify </h1>
       <h2>
@@ -113,6 +114,10 @@ console.log(params);
         <li>Email: <span id="email"></span></li>
       </ul>
     </div>
+    <div>
+      
+    </div>
+    </>
   );
 };
 export default Home ;
