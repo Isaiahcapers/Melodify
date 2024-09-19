@@ -1,5 +1,5 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import '../components/Navigation.css';
+import '../CSS/Navigation.css';
 import { useEffect, useState } from "react";
 
 interface NavigationLinks {
