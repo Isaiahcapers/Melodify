@@ -1,10 +1,9 @@
-#root {
-  max-width: 1280px;
+ #root {
+  width: 100%;
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
 }
-
+/*
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -16,7 +15,33 @@
 }
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
+} */
+
+.app-grid {
+  display: grid;
+  grid-template-areas:
+    "nav"
+    "content"
+    "footer";
+  grid-template-rows: auto 1fr auto;
+  height: 100vh;
+
 }
+
+.app-nav {
+  grid-area: nav;
+}
+
+.app-content {
+  grid-area: content;
+  overflow-y: auto;
+}
+
+.app-footer {
+  grid-area: footer;
+}
+
+
 
 @keyframes logo-spin {
   from {
