@@ -1,0 +1,8 @@
+ul li {
+    list-style: none;
+}
+
+#bio {
+    display: flex;
+    justify-content: space-around;    
+}  

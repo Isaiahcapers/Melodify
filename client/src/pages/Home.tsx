@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-
+import Player from '../components/Player';
+import '../CSS/Home.css';
 const Home = () => {
   const clientId = import.meta.env.VITE_CLIENT_ID || '';
   const params = new URLSearchParams(window.location.search);
@@ -124,12 +125,12 @@ const Home = () => {
         Logged in as <span id="displayName"></span>
       </h2>
       <span id="avatar"></span>
-      <ul>
+      <ul id='bio'>
         <li>Email: <span id="email"></span></li>
         <li>User Id: <span id="id"></span></li>
       </ul>
     </div>
-    <div>
+    <div className ="">
       {/* to category display api call */}
       <h2>Featured Playlists</h2>
       <div id="featured-playlists">
