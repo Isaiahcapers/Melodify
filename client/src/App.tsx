@@ -11,6 +11,7 @@ import MelodifyCallback from './pages/MelodifyCallback'; // Corrected the import
 
 import "./App.css"; // Assuming you have global styles here
 import Home from './pages/Home';
+import Footer from './components/Footer';
 
 const App: React.FC = () => {
   return (
@@ -28,6 +29,7 @@ const App: React.FC = () => {
         <Route path="/playlist" element={<ProtectedRoute><Playlist /></ProtectedRoute>} />
         <Route path='/home' element={<Home/>}/>
       </Routes>
+      <Footer />
     </div>
   );
 };
