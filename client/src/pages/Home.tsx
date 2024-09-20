@@ -100,30 +100,30 @@ const Home = () => {
     document.getElementById("imgUrl")!.innerText = profile.images[0]?.url ?? '(no profile image)';
   }
 
-async function getFeaturedPlayslist(token: string) {
+async function getFeaturedPlaylist(token: string) {
   const result = await fetch("https://api.spotify.com/v1/browse/featured-playlists", {
     method: "GET",
     headers: { Authorization: `Bearer ${token}` }
   });
 
-  useEffect(() => {
-    const fetchPlaylists = async () => {
-      try {
-        const token = await getAccessToken(clientId, code!);
-        const data = await getFeaturedPlayslist(token);
-        setPlaylists(data.playlists.items);
-      } catch (error) {
-        console.error('Error fetching playlists:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchPlaylists();
-  }, [clientId, code]);
-
   return await result.json();
 }
+
+useEffect(() => {
+  const fetchPlaylists = async () => {
+    try {
+      const token = await getAccessToken(clientId, code!);
+      const data = await getFeaturedPlaylist(token);
+      setPlaylists(data.playlists.items);
+    } catch (error) {
+      console.error('Error fetching playlists:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchPlaylists();
+}, [clientId, code]);
   return (
     <>
     <div id="profile">
@@ -132,13 +132,12 @@ async function getFeaturedPlayslist(token: string) {
         Logged in as <span id="displayName"></span>
       </h2>
       <span id="avatar"></span>
+      <div id ="homelists">
       <ul>
         <li>Email: <span id="email"></span></li>
         <li>User Id: <span id="id"></span></li>
-        <li>Profile URI: <a id="uri" href="#"></a></li>
-        <li>Profile URL: <a id="url" href="#"></a></li>
-        <li>Image URL: <span id="imgUrl"></span></li>
       </ul>
+      </div>
     </div>
     <div>
       {/* to category display api call */}
@@ -150,7 +149,12 @@ async function getFeaturedPlayslist(token: string) {
             <ul>
               {playlists.map((playlist: any) => (
                 <li key={playlist.id}>
-                  <a href={playlist.external_urls.spotify}>{playlist.name}</a>
+                  <a href={playlist.external_urls.spotify}>
+                    {playlist.images[0] && (
+                      <img src={playlist.images[0].url} alt={playlist.name} width="100" height="100" />
+                    )}
+                    {playlist.name}
+                  </a>
                 </li>
               ))}
             </ul>
