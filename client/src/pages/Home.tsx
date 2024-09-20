@@ -1,22 +1,32 @@
 import React, { useState, useEffect } from 'react';
-
+import Player from '../components/Player';
+import '../CSS/Home.css';
 const Home = () => {
   const clientId = import.meta.env.VITE_CLIENT_ID || '';
   const params = new URLSearchParams(window.location.search);
   const code = params.get("code");
   const [playlists, setPlaylists] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [accessToken, setAccessToken] = useState<string | null>(null);
 
-  (async () => {
-    if (!code) {
-      redirectToAuthCodeFlow(clientId);
-    } else {
-      const accessToken = await getAccessToken(clientId, code);
-      const profile = await fetchProfile(accessToken);
-      console.log(profile);
-      populateUI(profile);
-    }
-  })();
+
+
+  useEffect(() => {
+    const handleAuth = async () => {
+      if (!code) {
+        redirectToAuthCodeFlow(clientId);
+      } else {
+        const token = await getAccessToken(clientId, code);
+        setAccessToken(token);
+        const profile = await fetchProfile(token);
+        console.log(profile);
+        populateUI(profile);
+        await fetchAndSetPlaylists(token);
+        setLoading(false);
+      }
+    };
+    handleAuth();
+  }, [clientId, code]);
 
   async function redirectToAuthCodeFlow(clientId: string) {
     const verifier = generateCodeVerifier(128);
@@ -28,7 +38,7 @@ const Home = () => {
     params.append("client_id", clientId);
     params.append("response_type", "code");
     params.append("redirect_uri", "http://localhost:3000/");
-    params.append("scope", "user-read-private user-read-email");
+    params.append("scope", "user-read-private user-read-email user-read-playback-state  user-read-currently-playing user-read-recently-played user-modify-playback-state user-top-read playlist-read-private playlist-read-collaborative playlist-modify-private playlist-modify-public");
     params.append("code_challenge_method", "S256");
     params.append("code_challenge", challenge);
 
@@ -93,37 +103,20 @@ const Home = () => {
     }
     document.getElementById("id")!.innerText = profile.id;
     document.getElementById("email")!.innerText = profile.email;
-    document.getElementById("uri")!.innerText = profile.uri;
-    document.getElementById("uri")!.setAttribute("href", profile.external_urls.spotify);
-    document.getElementById("url")!.innerText = profile.href;
-    document.getElementById("url")!.setAttribute("href", profile.href);
-    document.getElementById("imgUrl")!.innerText = profile.images[0]?.url ?? '(no profile image)';
+  }
+  async function fetchAndSetPlaylists(token: string) {
+    const data = await getFeaturedPlaylist(token);
+    setPlaylists(data.playlists.items);
   }
 
-async function getFeaturedPlayslist(token: string) {
-  const result = await fetch("https://api.spotify.com/v1/browse/featured-playlists", {
-    method: "GET",
-    headers: { Authorization: `Bearer ${token}` }
-  });
+  async function getFeaturedPlaylist(token: string) {
+    const result = await fetch("https://api.spotify.com/v1/browse/featured-playlists", {
+      method: "GET",
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    return await result.json();
+  }
 
-  useEffect(() => {
-    const fetchPlaylists = async () => {
-      try {
-        const token = await getAccessToken(clientId, code!);
-        const data = await getFeaturedPlayslist(token);
-        setPlaylists(data.playlists.items);
-      } catch (error) {
-        console.error('Error fetching playlists:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchPlaylists();
-  }, [clientId, code]);
-
-  return await result.json();
-}
   return (
     <>
     <div id="profile">
@@ -132,31 +125,32 @@ async function getFeaturedPlayslist(token: string) {
         Logged in as <span id="displayName"></span>
       </h2>
       <span id="avatar"></span>
-      <ul>
+      <ul id='bio'>
         <li>Email: <span id="email"></span></li>
         <li>User Id: <span id="id"></span></li>
-        <li>Profile URI: <a id="uri" href="#"></a></li>
-        <li>Profile URL: <a id="url" href="#"></a></li>
-        <li>Image URL: <span id="imgUrl"></span></li>
       </ul>
     </div>
-    <div>
+    <div className ="">
       {/* to category display api call */}
-      <h1>Featured Playlists</h1>
+      <h2>Featured Playlists</h2>
       <div id="featured-playlists">
           {loading ? (
             <p>Loading...</p>
           ) : (
             <ul>
-              {playlists.map((playlist: any) => (
-                <li key={playlist.id}>
-                  <a href={playlist.external_urls.spotify}>{playlist.name}</a>
-                </li>
-              ))}
+              {playlists.length > 0 ? (
+                playlists.map((playlist: any) => (
+                  <li key={playlist.id}>
+                    <a href={playlist.external_urls.spotify}>{playlist.name}</a>
+                  </li>
+                ))
+              ) : (
+                <p>No playlists available.</p>
+              )}
             </ul>
           )}
         </div>
-
+  
     </div>
     </>
   );

@@ -1,7 +1,26 @@
-/* Login.css */
+/* General container for login, Spotify API output, and chart */
+.login-page-container {
+  display: flex;
+  flex-direction: column; /* Keeps the top tracks marquee above */
+  align-items: center;
+  padding: 20px;
+  margin: 0 auto;
+  max-width: 1000px;
+}
+
+/* Container for login and chart to be side-by-side */
+.main-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 1000px;
+  margin-top: 20px; /* Add space below the marquee */
+}
+
+/* Keep the login box centered vertically within its container */
 .login-container {
   width: 300px;
-  margin: 100px auto;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 10px;
@@ -9,18 +28,51 @@
   background-color: #f9f9f9;
 }
 
-.login-container h2 {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
 /* Styling for the logo */
 .logo {
   display: block;
   width: 100px;
-  margin: 0 auto 20px auto; /* Center the logo and add space below */
+  margin: 0 auto 20px auto;
+  transition: transform 0.3s ease-in-out;
 }
 
+.logo:hover {
+  animation: bounce 0.3s ease-in-out, throb 1.5s infinite 0.3s;
+  transform: translateY(-10px);
+}
+
+/* Apply the same bounce effect to the album images */
+.album-image {
+  display: block;
+  margin: 10px auto;
+  transition: transform 0.3s ease-in-out;
+}
+
+.album-image:hover {
+  animation: bounce 0.3s ease-in-out, throb 1.5s infinite 0.3s;
+  transform: translateY(-10px);
+}
+
+/* Keyframes for bounce and throb */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-30px);
+  }
+}
+
+@keyframes throb {
+  0%, 100% {
+    transform: scale(1) translateY(-10px);
+  }
+  50% {
+    transform: scale(1.1) translateY(-10px);
+  }
+}
+
+/* Form styles */
 .login-container .form-group {
   margin-bottom: 15px;
 }
@@ -38,40 +90,123 @@
   border-radius: 5px;
 }
 
-.login-container button {
+/* Button styles */
+.login-container button, .toggle-button {
   width: 100%;
   padding: 10px;
-  background-color: #4CAF50;
+  background-color: #008080;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-}
-
-.login-container button:hover {
-  background-color: #45a049;
-}
-
-/* Added styles */
-.form-box {
-  border: 1px solid #ddd;
-  padding: 20px;
-  border-radius: 10px;
-  background-color: #fff;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-}
-
-.toggle-button {
-  width: 100%;
-  padding: 10px;
   margin-top: 15px;
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
 }
 
-.toggle-button:hover {
-  background-color: #45a049;
+.login-container button:hover, .toggle-button:hover {
+  background-color: #006666;
+}
+
+/* Marquee container for top tracks */
+.top-tracks-marquee {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
+  overflow: hidden; /* Ensure no overflowing of the marquee */
+}
+
+.marquee {
+  white-space: nowrap;
+  display: flex;
+}
+
+.marquee ul {
+  display: flex;
+  animation: marquee 45s linear infinite; /* Continuously scroll without delay */
+  list-style-type: none;
+  padding: 0;
+}
+
+.marquee li {
+  display: inline-block;
+  margin-right: 50px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.marquee img {
+  vertical-align: middle;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Slow bounce and freeze on hover for marquee */
+.marquee:hover {
+  animation-play-state: paused; /* Pause the animation when hovering */
+}
+
+.marquee li:hover img {
+  animation: bounce 0.5s ease-in-out, throb 1.5s infinite 0.5s; /* Bounce effect when hovered */
+}
+
+/* Track details under the album */
+.track-details {
+  margin-top: 5px; /* Add space between the image and the details */
+  font-size: 13px;
+}
+
+/* Marquee animation keyframes */
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* Spotify API output container */
+.spotify-output {
+  width: 300px;
+  padding: 20px;
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Chart container */
+.chart-container {
+  width: 500px;
+  padding: 20px;
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-left: 40px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .login-page-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .main-content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .spotify-output, .chart-container {
+    margin-left: 0;
+    margin-top: 20px;
+    width: 100%;
+  }
+
+  .login-container {
+    width: 100%;
+  }
 }
