@@ -9,6 +9,7 @@ const Home = () => {
   const [accessToken, setAccessToken] = useState<string | null>(null);
 
 
+
   useEffect(() => {
     const handleAuth = async () => {
       if (!code) {
@@ -19,8 +20,7 @@ const Home = () => {
         const profile = await fetchProfile(token);
         console.log(profile);
         populateUI(profile);
-        const data = await getFeaturedPlaylist(token);
-        setPlaylists(data.playlists.items);
+        await fetchAndSetPlaylists(token);
         setLoading(false);
       }
     };
@@ -102,14 +102,11 @@ const Home = () => {
     }
     document.getElementById("id")!.innerText = profile.id;
     document.getElementById("email")!.innerText = profile.email;
-    document.getElementById("uri")!.innerText = profile.uri;
-    document.getElementById("uri")!.setAttribute("href", profile.external_urls.spotify);
-    document.getElementById("url")!.innerText = profile.href;
-    document.getElementById("url")!.setAttribute("href", profile.href);
-    document.getElementById("imgUrl")!.innerText = profile.images[0]?.url ?? '(no profile image)';
   }
-
-
+  async function fetchAndSetPlaylists(token: string) {
+    const data = await getFeaturedPlaylist(token);
+    setPlaylists(data.playlists.items);
+  }
 
   async function getFeaturedPlaylist(token: string) {
     const result = await fetch("https://api.spotify.com/v1/browse/featured-playlists", {
@@ -140,15 +137,19 @@ const Home = () => {
             <p>Loading...</p>
           ) : (
             <ul>
-              {playlists.map((playlist: any) => (
-                <li key={playlist.id}>
-                  <a href={playlist.external_urls.spotify}>{playlist.name}</a>
-                </li>
-              ))}
+              {playlists.length > 0 ? (
+                playlists.map((playlist: any) => (
+                  <li key={playlist.id}>
+                    <a href={playlist.external_urls.spotify}>{playlist.name}</a>
+                  </li>
+                ))
+              ) : (
+                <p>No playlists available.</p>
+              )}
             </ul>
           )}
         </div>
-
+  
     </div>
     </>
   );
