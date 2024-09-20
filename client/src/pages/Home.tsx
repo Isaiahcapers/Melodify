@@ -29,7 +29,7 @@ const Home = () => {
 
   async function redirectToAuthCodeFlow(clientId: string) {
     const verifier = generateCodeVerifier(128);
-    const challenge = await generateCodeChallenge(await verifier);
+    const challenge = await generateCodeChallenge(verifier);
 
     localStorage.setItem("verifier", verifier);
 
@@ -44,7 +44,7 @@ const Home = () => {
     document.location = `https://accounts.spotify.com/authorize?${params.toString()}`;
   }
 
-  async function generateCodeVerifier(length: number) {
+  function generateCodeVerifier(length: number) {
     let text = '';
     let possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
@@ -70,7 +70,7 @@ const Home = () => {
     params.append("client_id", clientId);
     params.append("grant_type", "authorization_code");
     params.append("code", code);
-    params.append("redirect_uri", "http://localhost:3000/home");
+    params.append("redirect_uri", "http://localhost:3000/");
     params.append("code_verifier", verifier!);
     console.log(params);
 
@@ -93,7 +93,7 @@ const Home = () => {
     return await result.json();
   }
 
-  async function populateUI(profile: any) {
+  function populateUI(profile: any) {
     document.getElementById("displayName")!.innerText = profile.display_name;
     if (profile.images[0]) {
       const profileImage = new Image(200, 200);
@@ -121,15 +121,13 @@ const Home = () => {
     <div id="profile">
       <h1>Welcome to Melodify</h1>
       <h2>
-        Logged in as <span id="displayName">{profile?.display_name}</span>
+        Logged in as <span id="displayName"></span>
       </h2>
       <span id="avatar"></span>
-      <div id ="homelists">
       <ul>
         <li>Email: <span id="email"></span></li>
         <li>User Id: <span id="id"></span></li>
       </ul>
-      </div>
     </div>
     <div>
       {/* to category display api call */}
