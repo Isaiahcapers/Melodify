@@ -23,7 +23,7 @@ body, html {
 }
 
 .nav-logo img {
-    height: 40px;
+    height: 65px;
 }
 
 /* Navigation list */
@@ -45,6 +45,7 @@ body, html {
     text-decoration: none;
     color: #fff;
     font-weight: bold;
+    font-size: 20px;
     padding: 10px 15px;
     white-space: nowrap;
 }
