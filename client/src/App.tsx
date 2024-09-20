@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Routes, Route } from "react-router-dom";
 import Navbar from './components/Navigation'; 
 import Login from './pages/Login'; 
@@ -10,8 +10,35 @@ import MelodifyCallback from './pages/MelodifyCallback';
 import "./App.css"; 
 import Home from './pages/Home';
 import Footer from './components/Footer';
+import {UseDataLayerValue} from './DataLayer';
+import { getAccessToken,fetchProfile } from './components/authUtils';
+import { initialState } from './components/Reducer';
+
+
 
 const App: React.FC = () => {
+  const [{user,token}, dispatch] = UseDataLayerValue();
+  
+  useEffect(() => {
+    const fetchToken = async () => {
+      const params = new URLSearchParams(window.location.search);
+      const code = params.get("code");
+      const clientId = import.meta.env.VITE_CLIENT_ID || '';
+      const token = await getAccessToken(clientId, code);
+
+      if (code) {
+
+        dispatch({ type: "SET_ACCESS_TOKEN", token:code });
+
+        await fetchProfile(token).then((user) => {
+          dispatch({ type: "SET_USER", user });
+        });
+      }
+    };
+
+    fetchToken();
+  }, [dispatch]);
+
   return (
     <div className ="app-grid">
       <div className ="app-nav">
