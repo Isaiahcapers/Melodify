@@ -10,10 +10,13 @@ import MelodifyCallback from './pages/MelodifyCallback';
 import "./App.css"; 
 import Home from './pages/Home';
 import Footer from './components/Footer';
-
+import { UseDataLayerValue } from './DataLayer';
 
 const App: React.FC = () => {
-  
+  const [{user,token}, dispatch] = UseDataLayerValue();
+// console.log("App page has access to the user",user);
+// console.log("App page has access to the token",token);
+
 
   return (
     <div className ="app-grid">
@@ -33,9 +36,6 @@ const App: React.FC = () => {
           <Route path="/playlist" element={<ProtectedRoute><Playlist /></ProtectedRoute>} />
           <Route path='/home' element={<Home/>}/>
         </Routes>
-      </div>
-      <div className="app-footer">
-        <Footer />
       </div>
     </div>
   );
