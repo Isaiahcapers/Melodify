@@ -13,9 +13,10 @@ import Footer from './components/Footer';
 import { UseDataLayerValue } from './DataLayer';
 
 const App: React.FC = () => {
-  const [{user,token}, dispatch] = UseDataLayerValue();
+  const [{user,token,playlist}, dispatch] = UseDataLayerValue();
 // console.log("App page has access to the user",user);
-// console.log("App page has access to the token",token);
+console.log("App page has access to the token",token);
+console.log("App page has access to the playlist",playlist);
 
 
   return (
