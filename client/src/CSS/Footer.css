@@ -1,7 +1,20 @@
 .footer {
     position:fixed;
+    display: flex;
+    justify-content: space-between;
+    width: 95%;
     bottom:0;
     height:65px;
     width:100%;
     background-color: lightslategrey;
+    align-items: center;
+}
+.footer-details{
+    flex: 30%;
+}
+.footer-controls{
+    flex: 40%;
+}   
+.footer-volume{
+    flex: 30%;
 }

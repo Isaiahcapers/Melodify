@@ -27,8 +27,11 @@
   height: 100vh;
 
 }
+.app-content::-webkit-scrollbar {
+  display: none;
+}
 
-.app-nav {
+  .app-nav {
   grid-area: nav;
 }
 

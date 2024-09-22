@@ -28,7 +28,7 @@ const Sidebar: React.FC = () => {
   }
   
   async function getFeaturedPlaylist(token: string) {
-    const result = await fetch("https://api.spotify.com/v1/browse/featured-playlists", {
+    const result = await fetch("https://api.spotify.com/v1/browse/featured-playlists?limit=15", {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` }
     });
