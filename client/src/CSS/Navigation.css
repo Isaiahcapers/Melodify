@@ -8,6 +8,7 @@ body, html {
 /* Style the navigation bar */
 .nav-bar {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
     background-color: #121212;
@@ -68,15 +69,16 @@ body {
 /* Responsive fix for smaller screens */
 @media (max-width: 768px) {
     .nav-bar {
-        flex-direction: column;
-        align-items: flex-start;
+        flex-direction: row;
+        align-content: center;
         height: auto;
         padding: 10px 20px; /* Reduce padding on smaller screens */
+
     }
 
     .nav-css {
-        flex-direction: column;
-        gap: 10px;
-        justify-content: flex-start;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
     }
 }
