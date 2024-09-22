@@ -1,8 +1,7 @@
 // models/user.ts
 import { DataTypes, Model } from 'sequelize';
-import { sequelize } from '../config/connection'; // Centralized Sequelize connection
+import { sequelize } from '../config/connection';
 
-// Define the User model
 class User extends Model {
   public id!: number;
   public username!: string;
@@ -12,7 +11,6 @@ class User extends Model {
   public readonly updatedAt!: Date;
 }
 
-// Initialize the User model
 User.init(
   {
     id: {
@@ -31,9 +29,9 @@ User.init(
     },
   },
   {
-    sequelize, // Pass the centralized sequelize instance
+    sequelize,
     modelName: 'User',
-    tableName: 'users',
+    tableName: 'users', // This ensures the table will be named 'users'
     timestamps: true,
   }
 );

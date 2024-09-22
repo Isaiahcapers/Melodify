@@ -1,15 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import Player from '../components/Player';
+import { useState, useEffect } from 'react';
 import '../CSS/Home.css';
+
 const Home = () => {
   const clientId = import.meta.env.VITE_CLIENT_ID || '';
   const params = new URLSearchParams(window.location.search);
   const code = params.get("code");
   const [playlists, setPlaylists] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [accessToken, setAccessToken] = useState<string | null>(null);
-
-
+  const [, setAccessToken] = useState<string | null>(null);
 
   useEffect(() => {
     const handleAuth = async () => {
@@ -38,7 +36,7 @@ const Home = () => {
     params.append("client_id", clientId);
     params.append("response_type", "code");
     params.append("redirect_uri", "http://localhost:3000/");
-    params.append("scope", "user-read-private user-read-email user-read-playback-state  user-read-currently-playing user-read-recently-played user-modify-playback-state user-top-read playlist-read-private playlist-read-collaborative playlist-modify-private playlist-modify-public");
+    params.append("scope", "user-read-private user-read-email");
     params.append("code_challenge_method", "S256");
     params.append("code_challenge", challenge);
 
@@ -73,7 +71,6 @@ const Home = () => {
     params.append("code", code);
     params.append("redirect_uri", "http://localhost:3000/");
     params.append("code_verifier", verifier!);
-    console.log(params);
 
     const result = await fetch("https://accounts.spotify.com/api/token", {
       method: "POST",
@@ -104,6 +101,7 @@ const Home = () => {
     document.getElementById("id")!.innerText = profile.id;
     document.getElementById("email")!.innerText = profile.email;
   }
+
   async function fetchAndSetPlaylists(token: string) {
     const data = await getFeaturedPlaylist(token);
     setPlaylists(data.playlists.items);
@@ -118,41 +116,30 @@ const Home = () => {
   }
 
   return (
-    <>
-    <div id="profile">
+    <div>
       <h1>Welcome to Melodify</h1>
-      <h2>
-        Logged in as <span id="displayName"></span>
-      </h2>
+      <h2>Logged in as <span id="displayName"></span></h2>
       <span id="avatar"></span>
-      <ul id='bio'>
+      <ul id="bio">
         <li>Email: <span id="email"></span></li>
         <li>User Id: <span id="id"></span></li>
       </ul>
+
+      <div className="playlists">
+        <h2>Featured Playlists</h2>
+        {loading ? <p>Loading...</p> : (
+          <ul>
+            {playlists.length > 0 ? (
+              playlists.map((playlist: any) => (
+                <li key={playlist.id}>
+                  <a href={playlist.external_urls.spotify}>{playlist.name}</a>
+                </li>
+              ))
+            ) : <p>No playlists available.</p>}
+          </ul>
+        )}
+      </div>
     </div>
-    <div className ="">
-      {/* to category display api call */}
-      <h2>Featured Playlists</h2>
-      <div id="featured-playlists">
-          {loading ? (
-            <p>Loading...</p>
-          ) : (
-            <ul>
-              {playlists.length > 0 ? (
-                playlists.map((playlist: any) => (
-                  <li key={playlist.id}>
-                    <a href={playlist.external_urls.spotify}>{playlist.name}</a>
-                  </li>
-                ))
-              ) : (
-                <p>No playlists available.</p>
-              )}
-            </ul>
-          )}
-        </div>
-  
-    </div>
-    </>
   );
 };
 

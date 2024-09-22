@@ -1,7 +1,7 @@
 /* General container for login, Spotify API output, and chart */
 .login-page-container {
   display: flex;
-  flex-direction: column; /* Keeps the top tracks marquee above */
+  flex-direction: column;
   align-items: center;
   padding: 20px;
   margin: 0 auto;
@@ -18,9 +18,12 @@
   margin-top: 20px; /* Add space below the marquee */
 }
 
+
+
 /* Keep the login box centered vertically within its container */
 .login-container {
-  width: 300px;
+  width: 100%; /* Make form full width and scale down */
+  max-width: 400px; /* Add a max-width to improve look on large screens */
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 10px;
@@ -46,6 +49,8 @@
   display: block;
   margin: 10px auto;
   transition: transform 0.3s ease-in-out;
+  width: 200px; /* Increase width from 80px to 150px */
+  height: auto; /* Let the height adjust automatically */
 }
 
 .album-image:hover {
@@ -77,33 +82,11 @@
   margin-bottom: 15px;
 }
 
-.login-container label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
-}
-
 .login-container input {
-  width: 95%;
-  padding: 8px;
+  width: 100%; /* Ensure full width inside container */
+  padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
-}
-
-/* Button styles */
-.login-container button, .toggle-button {
-  width: 100%;
-  padding: 10px;
-  background-color: #008080;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 15px;
-}
-
-.login-container button:hover, .toggle-button:hover {
-  background-color: #006666;
 }
 
 /* Marquee container for top tracks */
@@ -113,100 +96,45 @@
   align-items: center;
   width: 100%;
   margin-bottom: 20px;
-  overflow: hidden; /* Ensure no overflowing of the marquee */
+  overflow: hidden;
+}
+
+.track-by {
+  display: block; /* Forces "by" and the artist's name onto a new line */
+  margin-top: 5px; /* Add some space between the track name and "by" */
+  font-style: italic; /* Optional: make the "by" line italic */
+  font-size: 14px; /* Optional: adjust the font size */
 }
 
 .marquee {
   white-space: nowrap;
   display: flex;
+  animation: marquee 30s linear infinite; /* Adjusted for smoother loop */
 }
 
 .marquee ul {
   display: flex;
-  animation: marquee 45s linear infinite; /* Continuously scroll without delay */
   list-style-type: none;
   padding: 0;
+  margin: 0;
+  gap: 20px; /* Adjust gap for better spacing */
 }
 
 .marquee li {
   display: inline-block;
-  margin-right: 50px;
-  font-size: 14px;
   text-align: center;
 }
 
 .marquee img {
   vertical-align: middle;
   border-radius: 5px;
-  margin-bottom: 5px;
-  transition: transform 0.3s ease-in-out;
 }
 
-/* Slow bounce and freeze on hover for marquee */
-.marquee:hover {
-  animation-play-state: paused; /* Pause the animation when hovering */
-}
-
-.marquee li:hover img {
-  animation: bounce 0.5s ease-in-out, throb 1.5s infinite 0.5s; /* Bounce effect when hovered */
-}
-
-/* Track details under the album */
-.track-details {
-  margin-top: 5px; /* Add space between the image and the details */
-  font-size: 13px;
-}
-
-/* Marquee animation keyframes */
 @keyframes marquee {
   0% {
     transform: translateX(100%);
   }
   100% {
     transform: translateX(-100%);
-  }
-}
-
-/* Spotify API output container */
-.spotify-output {
-  width: 300px;
-  padding: 20px;
-  background-color: #f1f1f1;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Chart container */
-.chart-container {
-  width: 500px;
-  padding: 20px;
-  background-color: #f1f1f1;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  margin-left: 40px;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .login-page-container {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .main-content {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .spotify-output, .chart-container {
-    margin-left: 0;
-    margin-top: 20px;
-    width: 100%;
-  }
-
-  .login-container {
-    width: 100%;
   }
 }
