@@ -6,18 +6,18 @@ export default function Footer() {
     return (
         <footer className="footer">
             <div className="footer-details">
-                <img src="" alt="" />
+                <img src="" alt="" className="footer-song-logo"/>
                 <div className='footer-song-info'>
-                <h4></h4>
+                <h5>Artist Name</h5>
                 <p>details</p>
                 </div>
             </div>
             <div className="footer-controls">
-                <Shuffle />
-                <ArrowLeftCircle />
-                <PlayCircle />
-                <ArrowRightCircle />
-                <ArrowClockwise />
+                <Shuffle className="footer-icon"/>
+                <ArrowLeftCircle className="footer-icon" />
+                <PlayCircle className="footer-icon" />
+                <ArrowRightCircle className="footer-icon" />
+                <ArrowClockwise className="footer-icon" />
             </div>
             <div className="footer-volume">
                 <VolumeMute/>
