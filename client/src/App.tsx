@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Routes, Route } from "react-router-dom";
 import Navbar from './components/Navigation'; 
 import Login from './pages/Login'; 
@@ -10,8 +10,15 @@ import MelodifyCallback from './pages/MelodifyCallback';
 import "./App.css"; 
 import Home from './pages/Home';
 import Footer from './components/Footer';
+import { UseDataLayerValue } from './DataLayer';
 
 const App: React.FC = () => {
+  const [{user,token,playlist}, dispatch] = UseDataLayerValue();
+// console.log("App page has access to the user",user);
+console.log("App page has access to the token",token);
+console.log("App page has access to the playlist",playlist);
+
+
   return (
     <div className ="app-grid">
       <div className ="app-nav">
@@ -30,9 +37,6 @@ const App: React.FC = () => {
           <Route path="/playlist" element={<ProtectedRoute><Playlist /></ProtectedRoute>} />
           <Route path='/home' element={<Home/>}/>
         </Routes>
-      </div>
-      <div className="app-footer">
-        <Footer />
       </div>
     </div>
   );
