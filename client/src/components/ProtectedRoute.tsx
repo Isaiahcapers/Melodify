@@ -1,8 +1,18 @@
-import { Navigate } from "react-router-dom";
+import React from 'react';
+import { Navigate } from 'react-router-dom';
 
-const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
-  const token = localStorage.getItem("token"); // Check if token exists in localStorage
-  return token ? children : <Navigate to="/login" />; // If no token, redirect to login
+interface ProtectedRouteProps {
+  children: React.ReactNode;
+}
+
+const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
+  const isAuthenticated = !!localStorage.getItem('token'); // Check if token exists in localStorage
+
+  if (!isAuthenticated) {
+    return <Navigate to="/login" />; // Redirect to login if not authenticated
+  }
+
+  return <>{children}</>; // Render the children (protected components)
 };
 
 export default ProtectedRoute;

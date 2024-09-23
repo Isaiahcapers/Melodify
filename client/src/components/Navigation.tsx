@@ -21,16 +21,22 @@ export default function Navigation() {
   const currentTab = useLocation().pathname;
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [username, setUsername] = useState<string | null>(null); // Store username from token
 
   // Check if user is logged in by checking for token
   useEffect(() => {
     const token = localStorage.getItem("token");
-    setIsLoggedIn(!!token); // Set true if token exists
+    if (token) {
+      setIsLoggedIn(true);
+      const decodedToken: any = JSON.parse(atob(token.split('.')[1])); // Decode the JWT token
+      setUsername(decodedToken.username); // Extract and set username from token
+    }
   }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("token"); // Remove JWT token from local storage
     setIsLoggedIn(false); // Update state
+    setUsername(null); // Clear username
     navigate("/login"); // Redirect to login after logout
   };
 
@@ -64,9 +70,15 @@ export default function Navigation() {
           />
         ))}
         {isLoggedIn ? (
-          <li className="nav-button">
-            <button onClick={handleLogout}>Sign Out</button>
-          </li>
+          <>
+            <li className="nav-button">
+              {/* Display the logged-in user's username */}
+              <span>Welcome, {username}!</span>
+            </li>
+            <li className="nav-button">
+              <button onClick={handleLogout}>Sign Out</button>
+            </li>
+          </>
         ) : (
           <li className="nav-button">
             <Link to="/login">Sign In</Link>

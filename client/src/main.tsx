@@ -1,5 +1,5 @@
 import { createRoot } from "react-dom/client";
-import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom"; // Add Navigate to handle default redirection
+import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
 import "./index.css";
 
 import App from "./App";
@@ -12,26 +12,26 @@ import reducer, { initialState} from "./components/Reducer";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "*", // Use '*' here to handle nested routes properly
     element: <App />,
     errorElement: <Error />,
     children: [
       {
         index: true,
-        element: <Login />,  // Redirect to /login by default
+        element: <Navigate to="login" replace /> // Redirect to 'login' initially
       },
       {
-        path: "/login",
-        element: <Login />,  // Direct /login route
+        path: "login", // Make this a relative path
+        element: <Login />, // Direct /login route
       },
       {
-        path: "/playlist",
+        path: "playlist", // Relative path for playlist
         element: <Playlist />,
       },
       {
-        path: "/home",
+        path: "home", // Relative path for home
         element: <Home />,
-      }
+      },
     ],
   },
 ]);
