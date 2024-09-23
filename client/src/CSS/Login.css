@@ -83,7 +83,7 @@
 }
 
 .login-container input {
-  width: 100%; /* Ensure full width inside container */
+  width: 95%; /* Ensure full width inside container */
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
