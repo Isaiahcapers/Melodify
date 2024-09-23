@@ -5,7 +5,11 @@ import SidebarList from "./sidebarlist";
 import { House, Search } from 'react-bootstrap-icons';
 import { UseDataLayerValue } from "../DataLayer";
 
-const Sidebar: React.FC = () => {
+interface SidebarProps {
+  onSelectPlaylist: (playlistId: string) => void;
+}
+
+const Sidebar: React.FC <SidebarProps>= ({onSelectPlaylist}) => {
   const [{ playlists, token }, dispatch] = UseDataLayerValue();
   console.log("sidebar has acess to playlist",playlists);
   console.log("sidebar has access to the token",token);
@@ -38,6 +42,11 @@ const Sidebar: React.FC = () => {
     return data;
   }
 
+
+  async function fetchPlaylistId(playlistId: string) {
+    
+  }
+
   return (
     <div className="sidebar">
       <div className="sidebar-logo">
@@ -49,11 +58,12 @@ const Sidebar: React.FC = () => {
       <SidebarList Icon={Search} title="Playlist" />
       <strong className="sidebar-title">PLAYLIST</strong>
       <hr />
-      {localPlaylists.map((playlist: { name: string; images: { url: string }[] }) => (
-        <SidebarList key={playlist.name} title={playlist.name} image={playlist.images[0]?.url} />
+      {localPlaylists.map((playlist: { id: string; name: string; images: { url: string }[] }) => (
+        <SidebarList key={playlist.id} title={playlist.name} image={playlist.images[0]?.url} onClick={() => onSelectPlaylist(playlist.id)} />
       ))}
     </div>
-  );
-};
+    );
+  };
+
 
 export default Sidebar;

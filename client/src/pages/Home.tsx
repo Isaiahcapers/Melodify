@@ -44,7 +44,9 @@ const Home = () => {
   return (
     <div className="home">
     <div className="home-body">
-      <Sidebar />
+      <Sidebar onSelectPlaylist={function (playlistId: string): void {
+          throw new Error('Function not implemented.');
+        } } />
       <Body />
       <Footer />
     </div>

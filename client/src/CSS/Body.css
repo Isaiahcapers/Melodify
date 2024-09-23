@@ -1,7 +1,31 @@
 .body {
     flex:80%;
-    background: linear-gradient(transparent, lightsteelblue);
+    background: linear-gradient(transparent, #95ebc6);
     height: 100vh;
     color: white;
     padding:30px;
+}
+.body-banner {
+    background-color: #6a727c;
+    border-radius: 40px;
+
+}
+.banner {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    color: gray;
+}
+.banner > img {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    border-radius: 20px;
+    opacity: 0.90;
+}
+.banner-message {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
 }
