@@ -32,6 +32,7 @@
     "express": "^4.21.0",
     "jwt-decode": "^4.0.0",
     "openai": "^4.63.0",
+    "react-bootstrap": "^2.10.4",
     "react-bootstrap-icons": "^1.11.4",
     "react-router-dom": "^6.26.2"
   }
