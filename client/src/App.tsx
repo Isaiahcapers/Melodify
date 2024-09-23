@@ -1,21 +1,26 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navigation';
-import Login from './pages/Login';
-import RegisterForm from './components/RegisterForm';
-import ProtectedRoute from './components/ProtectedRoute';
-import HomePage from './pages/Home';
+import React, { useEffect } from 'react';
+import { Routes, Route } from "react-router-dom";
+import Navbar from './components/Navigation'; 
+import Login from './pages/Login'; 
+import RegisterForm from './components/RegisterForm'; 
+import ProtectedRoute from './components/ProtectedRoute'; 
+import HomePage from './pages/Home'; 
 import Playlist from './pages/Playlist';
 import MelodifyCallback from './pages/MelodifyCallback';
 import './App.css';
 import Home from './pages/Home';
-import Footer from './components/Footer';
+import { UseDataLayerValue } from './DataLayer';
 
 const App: React.FC = () => {
   // Function to handle successful registration and redirect to login
   const handleRegisterSuccess = () => {
     window.location.href = "/login"; // Redirect to login page after successful registration
   };
+  const [{user,token,playlist}, dispatch] = UseDataLayerValue();
+// console.log("App page has access to the user",user);
+console.log("App page has access to the token",token);
+console.log("App page has access to the playlist",playlist);
+
 
   return (
     <div className="app-grid">
@@ -54,9 +59,6 @@ const App: React.FC = () => {
             }
           />
         </Routes>
-      </div>
-      <div className="app-footer">
-        <Footer />
       </div>
     </div>
   );

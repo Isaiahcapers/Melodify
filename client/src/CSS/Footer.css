@@ -1,4 +1,55 @@
 .footer {
+    position:fixed;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    bottom:0;
+    height: 70px;
+    background-color: lightslategrey;
+    align-items: center;
+}
+.footer-details{
+    flex: 30%;
+    display: flex;
+    padding: 0 10px;
+    width: 250px;
+    color: white;
+}
+.footer-controls{
+    flex: 40%;
+    display: flex;
+    padding: 0 100px;
+    color: white;
+    justify-content:space-between;
+    align-items: center;
+    max-width: 300px;
+    font-size: 1.4em;
+}   
+.footer-volume{
+    flex: 30%;
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    padding: 0 10px;
+    font-size: 1.2em;
+}
+.footer-song-logo{
+    height: 60px;
+    width: 60px;
+    object-fit: contain;
+    margin-right:15px;
+}
+.footer-song-info > p {
+    font-size: 10px;
+}
+.footer-song-info > h4 {
+    margin-bottom: 5px;
+}
+.footer-icon:hover{
+    transition: transform 0.2s ease-in-out;
+    transform: scale(1.1);
+}
+.footer {
     display: flex;
     flex-direction: column;
     align-items: center;
