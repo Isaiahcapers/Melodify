@@ -15,7 +15,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Navigate to="/login" replace />,  // Redirect to /login by default
+        element: <Login />,  // Redirect to /login by default
       },
       {
         path: "/login",
