@@ -39,8 +39,8 @@ router.post('/register', async (req, res) => {
 
     return res.status(201).json({ message: 'User registered successfully', user: newUser });
   } catch (error) {
-    const err = error as Error; // Cast error to Error type
-    return res.status(500).json({ message: err.message });
+    console.error('Registration Error:', error);
+    return res.status(500).json({ message: 'Error registering user' });
   }
 });
 
@@ -68,9 +68,9 @@ router.post('/login', async (req, res) => {
 
     return res.status(200).json({ token, message: 'Login successful' });
   } catch (error) {
-    const err = error as Error; // Cast error to Error type
-    return res.status(500).json({ message: err.message });
+    console.error('Login Error:', error);
+    return res.status(500).json({ message: 'Error logging in user' });
   }
 });
 
-export { router as authRoutes }; // Exporting the router as authRoutes
+export { router as authRoutes };

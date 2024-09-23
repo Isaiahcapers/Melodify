@@ -1,3 +1,4 @@
+// import { jwtDecode } from 'jwt-decode';
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -7,50 +8,52 @@ interface FormData {
 }
 
 const LoginForm = () => {
-  const [formData, setFormData] = useState<FormData>({
-    username: "",
-    password: "",
-  });
-
+  const [formData, setFormData] = useState<FormData>({ username: "", password: "" });
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setErrorMessage(null); // Reset the error message before the request
+    setSuccessMessage(null); // Reset the success message
 
     try {
       const response = await fetch("/api/auth/login", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
 
       if (response.ok) {
         const data = await response.json();
-        
-        // Optionally: check if token exists and store it
-        if (data.token) {
-          localStorage.setItem("token", data.token); // Store JWT token
-          alert("Logged in successfully!");
-          navigate("/"); // Redirect to Home Page after successful login
-        } else {
-          alert("Login failed: Invalid token received.");
-        }
+        const { token } = data;
+
+        // Decode the JWT token to get user information
+        // const decodedToken: any = jwtDecode(token);
+
+        // Store token in localStorage
+        localStorage.setItem("token", token);
+
+        // Set success message and redirect to home
+        setSuccessMessage("Logged in successfully! Redirecting to home...");
+        setErrorMessage(null);
+        setTimeout(() => {
+          navigate("/home"); // Redirect to Home Page after a short delay
+        }, 1500);
       } else {
         const errorData = await response.json();
-        alert(`Login failed: ${errorData.message || "Unknown error"}`);
+        setErrorMessage(errorData.message || "Login failed");
+        setSuccessMessage(null);
       }
     } catch (error) {
-      console.error("Error during login:", error);
-      alert("Login failed due to a network error.");
+      console.error("Login error:", error);
+      setErrorMessage("Login failed due to a network error.");
+      setSuccessMessage(null);
     }
   };
 
@@ -60,34 +63,26 @@ const LoginForm = () => {
       <div className="form-group">
         <input
           type="text"
-          id="username"
           name="username"
           placeholder="Username"
           value={formData.username}
           onChange={handleChange}
-          className="form-input"
           required
         />
       </div>
       <div className="form-group">
         <input
           type="password"
-          id="password"
           name="password"
           placeholder="Password"
           value={formData.password}
           onChange={handleChange}
-          className="form-input"
           required
         />
       </div>
-      <div className="form-group">
-        <label className="checkbox-label">
-          <input type="checkbox" /> Stay signed in
-        </label>
-      </div>
       <button type="submit" className="login-button">Login</button>
-      <a href="#" className="forgot-password">Forgot Password?</a>
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
+      {successMessage && <p className="success-message">{successMessage}</p>}
     </form>
   );
 };

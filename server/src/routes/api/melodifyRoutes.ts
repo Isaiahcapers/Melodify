@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import fetch from 'node-fetch'; // Make sure node-fetch is installed
+import fetch from 'node-fetch'; // Ensure node-fetch is installed
 
 const router = Router();
 
@@ -16,19 +16,11 @@ router.get('/auth', (_req, res) => {
   const client_id = process.env.SPOTIFY_CLIENT_ID;
   const redirect_url = process.env.SPOTIFY_REDIRECT_URL;
 
-  // Log the values to check if they are being read correctly
-  console.log('Client ID:', client_id);
-  console.log('Redirect URL:', redirect_url);
-
   if (!client_id || !redirect_url) {
-    console.error('Missing required environment variables:');
-    if (!client_id) console.error('SPOTIFY_CLIENT_ID is missing');
-    if (!redirect_url) console.error('SPOTIFY_REDIRECT_URL is missing');
     return res.status(500).json({ message: 'Server misconfiguration: Missing client_id or redirect_url' });
   }
 
   const authURL = `https://accounts.spotify.com/authorize?client_id=${client_id}&response_type=code&redirect_uri=${encodeURIComponent(redirect_url)}&scope=user-read-private`;
-  console.log('Authorization URL:', authURL);
   return res.redirect(authURL);
 });
 
@@ -37,6 +29,9 @@ router.get('/auth', (_req, res) => {
  */
 router.get('/top-tracks/:id', async (req, res) => {
   const artistId = req.params.id;
+  console.log('Fetching top tracks for artist ID:', artistId);  // Log the artist ID
+
+  console.log('Artist ID:', artistId);
   const client_id = process.env.SPOTIFY_CLIENT_ID;
   const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
 
@@ -47,13 +42,12 @@ router.get('/top-tracks/:id', async (req, res) => {
     const tokenResponse = await fetch('https://accounts.spotify.com/api/token', {
       method: 'POST',
       headers: {
-        'Authorization': `Basic ${authString}`,
+        Authorization: `Basic ${authString}`,
         'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: 'grant_type=client_credentials',
     });
 
-    // Cast response to the expected type
     const tokenData = (await tokenResponse.json()) as SpotifyTokenResponse;
 
     if (!tokenResponse.ok) {

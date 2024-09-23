@@ -1,7 +1,43 @@
+import { useState } from 'react';
 import '../CSS/Footer.css';
 import { Shuffle,PlayCircle,ArrowRightCircle,ArrowLeftCircle,ArrowClockwise,VolumeUp,VolumeDown,VolumeMute } from 'react-bootstrap-icons';
 
+const handleClick = () => {
+
+};
+
 export default function Footer() {
+    const [haikuPrompt, setHaikuPrompt] = useState(''); // State for user input (haiku topic)
+    const [haiku, setHaiku] = useState(''); // State to store the generated haiku
+    const [error, setError] = useState(''); // State for error handling
+
+    // Function to handle haiku generation
+    const generateHaiku = async () => {
+        if (!haikuPrompt.trim()) {
+            setError('Please enter a topic for the haiku.');
+            return;
+        }
+        setError(''); // Clear previous error if any
+        try {
+            const response = await fetch('/api/openai/haiku', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ message: haikuPrompt }), // Pass the user input
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to generate haiku');
+            }
+
+            const data = await response.json();
+            setHaiku(data.haiku); // Store the returned haiku
+        } catch (error) {
+            setError('Error generating haiku. Please try again.');
+            console.error('Error generating haiku:', error);
+        }
+    };
 
     return (
         <footer className="footer">
@@ -24,6 +60,40 @@ export default function Footer() {
                 <VolumeDown/>
                 <VolumeUp/>
             </div>
-        </footer> 
+            <div className="haiku-container">
+                <div className="api-button">
+                    <h2 className="haiku-title">Ask me anything about music!</h2>
+                    <input
+                        type="text"
+                        className="haiku-input"
+                        placeholder="Enter a haiku topic"
+                        value={haikuPrompt}
+                        onChange={(e) => setHaikuPrompt(e.target.value)}
+                    />
+                    
+                    {/* Button to generate haiku */}
+                    <button className="submit-button" onClick={generateHaiku}>
+                        Generate Response
+                    </button>
+                </div>
+
+                {/* Display the generated haiku on the right */}
+                {haiku && (
+                    <div className="haiku-result">
+                        <h3>AI Results:</h3>
+                        <p>{haiku}</p>
+                    </div>
+                )}
+            </div>
+
+            {/* Display error if any */}
+            {error && <p className="error-message">{error}</p>}
+        </footer>
     );
 }
+
+
+
+
+
+
