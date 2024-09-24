@@ -19,10 +19,12 @@ interface Track {
 interface TracksProps {
   track: Track;
   playSong: (id: string) => void;
+  onSelectTrack: (track: Track) => void;
 }
 
-const Tracks: React.FC<TracksProps> = ({ track, playSong }) => {
-  console.log("Tracks");
+const Tracks: React.FC<TracksProps> = ({ track, playSong, onSelectTrack }) => {
+  
+  // console.log("Tracks");
 
   return (
     <div className="track" onClick={() => playSong(track.id)}>

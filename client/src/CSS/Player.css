@@ -1,0 +1,24 @@
+.player {
+    flex:80%;
+    background: linear-gradient(transparent, #95ebc6);
+    height: 100vh;
+    color: white;
+    padding:30px;
+    overflow-y: overlay;
+}
+.player::-webkit-scrollbar {
+    display: none;
+}
+.player-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+.player-album {
+    max-height: 350px;
+    width: 350px;
+    object-fit: contain;
+    margin-bottom: 20px;
+}

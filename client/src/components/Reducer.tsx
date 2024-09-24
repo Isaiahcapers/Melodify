@@ -31,7 +31,28 @@ const reducer = (state: any,action:any) => {
             return {
                 ...state,
                 selectedPlaylistId: action.selectedPlaylistId
-            };    
+            };
+        case "SET_PLAYING":
+                return {
+                  ...state,
+                  playing: action.playing,
+                };
+          
+        case "SET_SONG":
+                return {
+                  ...state,
+                  song: action.song,
+                };
+        case "SET_SONG_ID":
+                return {
+                  ...state,
+                  songId: action.songId,
+                };
+        case 'SET_TRACKS':
+                return {
+                    ...state,
+                    tracks: action.tracks,
+                };        
         
         default: // If no action is passed in, return the current state
         return state;

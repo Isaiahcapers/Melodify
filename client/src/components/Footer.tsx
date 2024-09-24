@@ -1,12 +1,16 @@
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import '../CSS/Footer.css';
 import { Shuffle,PlayCircle,ArrowRightCircle,ArrowLeftCircle,ArrowClockwise,VolumeUp,VolumeDown,VolumeMute } from 'react-bootstrap-icons';
+import { UseDataLayerValue } from '../DataLayer';
 
-const handleClick = () => {
 
-};
 
 export default function Footer() {
+    const [{ song, token }, dispatch] = UseDataLayerValue();
+
+console.log("footer",song);
+console.log("footer",token);
+
     const [haikuPrompt, setHaikuPrompt] = useState(''); // State for user input (haiku topic)
     const [haiku, setHaiku] = useState(''); // State to store the generated haiku
     const [error, setError] = useState(''); // State for error handling
@@ -39,15 +43,80 @@ export default function Footer() {
         }
     };
 
+
+    // async function handlePlayPause() {
+    //     if (token) {
+    //         const data = await getCurrentlyPlaying();
+    //         if (data.is_playing) {
+    //             const response = await fetch("https://api.spotify.com/v1/me/player/pause", {
+    //                 method: "PUT",
+    //                 headers: {
+    //                     Authorization: `Bearer ${token}`
+    //                 }
+    //             });
+    //             if (response.status === 204) {
+    //                 dispatch({ type: 'SET_GLOBAL_IS_TRACK_PLAYING', globalIsTrackPlaying: false });
+    //             }
+    //         } else {
+    //             const response = await fetch("https://api.spotify.com/v1/me/player/play", {
+    //                 method: "PUT",
+    //                 headers: {
+    //                     Authorization: `Bearer ${token}`
+    //                 }
+    //             });
+    //             if (response.status === 204) {
+    //                 dispatch({ type: 'SET_GLOBAL_IS_TRACK_PLAYING', globalIsTrackPlaying: true });
+    //                 dispatch({ type: 'SET_GLOBAL_CURRENT_SONG_ID', globalCurrentSongId: data.item.id });
+    //             }
+    //         }
+    //     }
+    // }
+
+    // async function playSong(song: { id: string; uri: string }) {
+    //     // const getDeviceId = await fetch("https://api.spotify.com/v1/me/player/devices", {
+    //     //     method: "GET",
+    //     //     headers: {
+    //     //       Authorization: `Bearer ${token}`
+    //     //     },
+    //     //     });
+    //     //     const data = await getDeviceId.json();
+    //     //     const deviceId = data.devices[0].id;
+    //     //     // console.log("device id", deviceId);
+            
+
+    //       const response = await fetch(`https://api.spotify.com/v1/me/player/play?`, {
+    //         method: "PUT",
+    //         headers: {
+    //           Authorization: `Bearer ${token}`
+    //         },
+    //         body: JSON.stringify({
+    //           uris: [song.uri]
+    //         })
+    //       });
+    //       console.log("on play", response.status);
+    //     }
+    
+
+
+    
+
     return (
         <footer className="footer">
             <div className="footer-details">
-                <img src="" alt="" className="footer-song-logo"/>
-                <div className='footer-song-info'>
-                <h5>Artist Name</h5>
-                <p>details</p>
-                </div>
+        {song ? (
+          <>
+            <img src={song?.album?.images[0]?.url} alt={song?.name} className="footer-song-logo" />
+            <div className="footer-song-info">
+              <h5>{song?.name}</h5>
+              <p>{song?.artists?.map((artist: any) => artist.name).join(', ')}</p>
             </div>
+          </>
+        ) : (
+          <div className="footer-song-info">
+            <h5>No track selected</h5>
+          </div>
+        )}
+      </div>
             <div className="footer-controls">
                 <Shuffle className="footer-icon"/>
                 <ArrowLeftCircle className="footer-icon" />
@@ -88,6 +157,8 @@ export default function Footer() {
 
             {/* Display error if any */}
             {error && <p className="error-message">{error}</p>}
+            
+
         </footer>
     );
 }

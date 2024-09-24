@@ -16,10 +16,10 @@ const App: React.FC = () => {
   const handleRegisterSuccess = () => {
     window.location.href = "/login"; // Redirect to login page after successful registration
   };
-  const [{user,token,playlist}, dispatch] = UseDataLayerValue();
+  const [{user,token,playlists}, dispatch] = UseDataLayerValue();
 // console.log("App page has access to the user",user);
-console.log("App page has access to the token",token);
-console.log("App page has access to the playlist",playlist);
+// console.log("App page has access to the token",token);
+console.log("App page has access to the playlist",playlists);
 
 
   return (
