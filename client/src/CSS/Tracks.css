@@ -1,0 +1,33 @@
+.track {
+    display: flex;
+    align-items: center;
+    color: white;
+    background-color: #6a727c;
+    border-radius: 40px;
+    margin:5px 0;
+}
+.track-album {
+    height: 100px;
+    margin-right: 15px;
+    flex:0.2;
+    border-radius: 40px 0 0 40px;
+}
+.track-album > img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+    
+}
+.track-info > h1 {
+    font-size: 1.2em;
+    margin-bottom: 5px;
+}
+.track-info > p {
+    font-size: 0.8em;
+}
+.track-info {
+    flex: 0.8;
+        background-color: #6a727c;
+    border-radius: 40px;
+
+}

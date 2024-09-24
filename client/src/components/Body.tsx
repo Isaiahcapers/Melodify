@@ -6,29 +6,23 @@ import { UseDataLayerValue } from '../DataLayer';
 import Tracks from './Tracks';
 import Sidebar from './Sidebar';
 
-function Body() {
-  const [{user,token,playlist},dispatch] = UseDataLayerValue();
-  const [tracks,setTracks] = useState<any[]>([]);
+interface BodyProps {
+  tracks: any[];
+  // Define any props if needed in the future
+}
 
-  const fetchTracks = async (playlistId: string) => {
-    const result = await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
-      method: "GET",
-      headers: { Authorization: `Bearer ${token}` }
-    });
-    if (!result.ok) {
-      console.error("Failed to fetch tracks:", result.statusText);
-      return;
-    }
-    const data = await result.json();
-    console.log("Tracks",data.items);
-    
-    setTracks(data.items);
-  };
+function Body({tracks}: BodyProps) {
+  const [{user,token,playlist},dispatch] = UseDataLayerValue();
+  const [selectedPlaylistId, setSelectedPlaylistId] = useState<string | null>(null);
+
+  console.log(tracks);
+  
 
   const playSong = (trackId: string) => {
     console.log(`Playing song with ID: ${trackId}`);
     // Add your logic to play the song
   };
+  
 
 
   return (
@@ -43,7 +37,7 @@ function Body() {
         </div>
       </div>
       <div className="body-playlist-area">
-        {playlist?.tracks.items.map((item: { track: { id: string; name: string; artists: any[]; album: any } }) => (
+        {tracks?.map((item: { track: { id: string; name: string; artists: any[]; album: any } }) => (
             <Tracks key={item.track.id} track={item.track} playSong={playSong} />
         ))}
       </div>
