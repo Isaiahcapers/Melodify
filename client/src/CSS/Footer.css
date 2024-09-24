@@ -16,6 +16,7 @@
     padding: 0 10px;
     width: 250px;
     color: white;
+    align-items: center;
 }
 .footer-controls{
     flex: 40%;
@@ -51,20 +52,15 @@
     transition: transform 0.2s ease-in-out;
     transform: scale(1.1);
 }
-/* .footer {
+.footer-song-info
+{
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 120px; /* Keep footer height small 
-    left: 0;
-    position: absolute;
-    bottom: 0;
-    background-color: black;
-    color: white;
-    padding: 10px;
-} */
+}
+.footer-song-info > h5,
+.footer-song-info > p {
+    margin: 0;
+}
 
 .haiku-container {
     display: flex;

@@ -8,8 +8,12 @@
     padding-right: 10px;   
     display: flex;
     flex-direction: column;
-}
+    overflow-y: overlay;
 
+}
+.sidebar::-webkit-scrollbar {
+    display: none;
+}
 .sidebar-img {
 object-fit: contain;
 height: 70px;

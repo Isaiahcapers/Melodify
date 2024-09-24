@@ -42,11 +42,11 @@ const reducer = (state: any,action:any) => {
                 return {
                   ...state,
                   song: action.song,
-                };    
-        case 'SET_SELECTED_TRACK': // Add this case
+                };
+        case "SET_SONG_ID":
                 return {
-                    ...state,
-                    selectedTrack: action.selectedTrack,
+                  ...state,
+                  songId: action.songId,
                 };
         case 'SET_TRACKS':
                 return {

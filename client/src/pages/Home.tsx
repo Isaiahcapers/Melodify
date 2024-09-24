@@ -28,6 +28,17 @@ const Home = () => {
         dispatch({ type: "SET_ACCESS_TOKEN", token });
         const profile = await fetchProfile(token);
         dispatch({ type: "SET_USER", user: profile });
+        // console.log("profile",profile);
+        // const getDeviceId = await fetch("https://api.spotify.com/v1/me/player/devices", {
+        //   method: "GET",
+        //   headers: {
+        //     Authorization: `Bearer ${token}`
+        //   },
+        //   });
+        //   const data = await getDeviceId.json();
+        //   const deviceId = data.devices[0].id;
+        //   console.log("device id", deviceId);
+        
       }
     };
     handleAuth();
