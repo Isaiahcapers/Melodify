@@ -9,17 +9,14 @@ import Footer from '../components/Footer';
 
 const Home = () => {
   const clientId = import.meta.env.VITE_CLIENT_ID || '';
-    // console.log("I have a clientId",clientId);
   const params = new URLSearchParams(window.location.search);
   const code = params.get("code");
     // console.log("I have a code",code);
-  // const [playlists, setPlaylists] = useState<any[]>([]);
-  // const [loading, setLoading] = useState<boolean>(true);
-  // const [accessToken, setAccessToken] = useState<string | null>(null);
     // console.log("I have and access token:",accessToken);
-  
+    // console.log("I have a clientId",clientId);
   const [{token}, dispatch] = UseDataLayerValue();
     console.log("token for datalayer",token);
+  const [tracks,setTracks] = useState<any[]>([]);
 
 
   useEffect(() => {
@@ -35,7 +32,29 @@ const Home = () => {
     };
     handleAuth();
   }, [clientId, code]);
+  
+  const fetchTracks = async (playlistId: string) => {
+    const result = await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks?limit=15`, {
+      method: "GET",
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    if (!result.ok) {
+      console.error("Failed to fetch tracks:", result.statusText);
+      return;
+    }
+    const data = await result.json();
+    console.log("this is the playlist id",playlistId);
+    
+    console.log("Tracks",data.items);
+    
+    setTracks(data.items);
+  };
 
+  const onSelectPlaylist = (playlistId: string) => {
+    console.log(`Selected Playlist ID: ${playlistId}`);
+    fetchTracks(playlistId);
+    dispatch({ type: "SET_SELECTED_PLAYLIST_ID", selectedPlaylistId: playlistId });
+  };
 
 
 
@@ -44,10 +63,8 @@ const Home = () => {
   return (
     <div className="home">
     <div className="home-body">
-      <Sidebar onSelectPlaylist={function (playlistId: string): void {
-          throw new Error('Function not implemented.');
-        } } />
-      <Body />
+      <Sidebar onSelectPlaylist={ onSelectPlaylist} />
+      <Body tracks={tracks}/>
       <Footer />
     </div>
     </div>

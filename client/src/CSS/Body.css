@@ -4,9 +4,9 @@
     height: 100vh;
     color: white;
     padding:30px;
+    overflow-y: overlay;
 }
 .body-banner {
-    background-color: #6a727c;
     border-radius: 40px;
 
 }
@@ -15,6 +15,8 @@
     height: 200px;
     display: flex;
     color: gray;
+    background-color: #6a727c;
+    border-radius: 40px;
 }
 .banner > img {
     width: 100%;
@@ -28,4 +30,8 @@
     flex-direction: column;
     justify-content: center;
     color: white;
+}
+
+.body::-webkit-scrollbar {
+    display: none;
 }

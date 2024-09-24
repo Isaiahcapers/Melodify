@@ -1,5 +1,5 @@
 import React from 'react';
-
+import '../CSS/Tracks.css';
 interface Artist {
   name: string;
 }

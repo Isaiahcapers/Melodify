@@ -26,7 +26,13 @@ const reducer = (state: any,action:any) => {
             return {
                 ...state,
                 playlists: action.playlists
+            };
+        case 'SET_SELECTED_PLAYLIST_ID':
+            return {
+                ...state,
+                selectedPlaylistId: action.selectedPlaylistId
             };    
+        
         default: // If no action is passed in, return the current state
         return state;
     }
