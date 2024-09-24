@@ -1,0 +1,8 @@
+.player {
+    flex:80%;
+    background: linear-gradient(transparent, #95ebc6);
+    height: 100vh;
+    color: white;
+    padding:30px;
+    overflow-y: overlay;
+}

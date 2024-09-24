@@ -12,15 +12,35 @@ interface BodyProps {
 }
 
 function Body({tracks}: BodyProps) {
-  const [{user,token,playlist},dispatch] = UseDataLayerValue();
-  const [selectedPlaylistId, setSelectedPlaylistId] = useState<string | null>(null);
+  const [{user,token,playlists,playing,selectedTrack},dispatch] = UseDataLayerValue();
+  // console.log("Reducer is receiving SET_PLAYING information", playing);
+  // console.log("Selected Track", selectedTrack);
+  // const [selectedPlaylistId, setSelectedPlaylistId] = useState<string | null>(null);
 
   console.log(tracks);
-  
+ const [trackInfo, setTrackInfo] = useState<any[]>([]);
+ const onSelectTrack = (track: any) => {
+    console.log(`Selected Track ID: ${track.id}`);
+    dispatch({ type: "SET_PLAYING", playing: true });
+    dispatch({ type: "SET_SELECTED_TRACK", selectedTrack: track }); // Dispatch the new action 
+  } 
 
-  const playSong = (trackId: string) => {
-    console.log(`Playing song with ID: ${trackId}`);
-    // Add your logic to play the song
+  const playSong = async (trackId: string) => {
+    const result = await fetch (`
+https://api.spotify.com/v1/tracks/${trackId}`, {
+      method: "GET",
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    if (!result.ok) {
+      console.error("Failed to fetch track info:", result.statusText);
+      return;
+    }
+    const data = await result.json();
+    console.log("Track Info", data);
+    setTrackInfo(data.items);
+
+    dispatch({ type: "SET_SONG", song: data });
+     
   };
   
 

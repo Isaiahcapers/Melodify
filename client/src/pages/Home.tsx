@@ -15,7 +15,7 @@ const Home = () => {
     // console.log("I have and access token:",accessToken);
     // console.log("I have a clientId",clientId);
   const [{token}, dispatch] = UseDataLayerValue();
-    console.log("token for datalayer",token);
+    // console.log("token for datalayer",token);
   const [tracks,setTracks] = useState<any[]>([]);
 
 
@@ -48,6 +48,7 @@ const Home = () => {
     console.log("Tracks",data.items);
     
     setTracks(data.items);
+    dispatch({ type: "SET_TRACKS", tracks: data.items });
   };
 
   const onSelectPlaylist = (playlistId: string) => {
@@ -55,7 +56,11 @@ const Home = () => {
     fetchTracks(playlistId);
     dispatch({ type: "SET_SELECTED_PLAYLIST_ID", selectedPlaylistId: playlistId });
   };
-
+  // const onSelectTrack = (trackId: string) => {
+  //   console.log(`Selected Track ID: ${trackId}`);
+  //   dispatch({ type: "SET_PLAYING", playing: true });
+  //   dispatch({ type: "SET_SELECTED_TRACK", selectedTrack: trackId }); // Dispatch the new action
+  // };
 
 
 

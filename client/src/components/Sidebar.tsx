@@ -36,7 +36,7 @@ const Sidebar: React.FC <SidebarProps>= ({onSelectPlaylist}) => {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` }
     });
-    console.log("GFP function",result);
+    // console.log("GFP function",result);
     
     const data = await result.json();
     return data;
@@ -59,7 +59,7 @@ const Sidebar: React.FC <SidebarProps>= ({onSelectPlaylist}) => {
       <strong className="sidebar-title">PLAYLIST</strong>
       <hr />
       {localPlaylists.map((playlist: { id: string; name: string; images: { url: string }[] }) => {
-        console.log("playlist id", playlist.id);
+        // console.log("playlist id", playlist.id);
         return (
           <SidebarList 
             key={playlist.id}

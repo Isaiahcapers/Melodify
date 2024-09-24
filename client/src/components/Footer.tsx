@@ -1,12 +1,17 @@
 import { useState } from 'react';
 import '../CSS/Footer.css';
 import { Shuffle,PlayCircle,ArrowRightCircle,ArrowLeftCircle,ArrowClockwise,VolumeUp,VolumeDown,VolumeMute } from 'react-bootstrap-icons';
+import Tracks from './Tracks';
+import { UseDataLayerValue } from '../DataLayer';
 
-const handleClick = () => {
-
-};
+interface FooterProps {
+    tracks: any[];
+  }
 
 export default function Footer() {
+    const [{song}] = UseDataLayerValue();
+console.log("footer",song);
+
     const [haikuPrompt, setHaikuPrompt] = useState(''); // State for user input (haiku topic)
     const [haiku, setHaiku] = useState(''); // State to store the generated haiku
     const [error, setError] = useState(''); // State for error handling
@@ -42,12 +47,20 @@ export default function Footer() {
     return (
         <footer className="footer">
             <div className="footer-details">
-                <img src="" alt="" className="footer-song-logo"/>
-                <div className='footer-song-info'>
-                <h5>Artist Name</h5>
-                <p>details</p>
-                </div>
+        {song ? (
+          <>
+            <img src={song.album.images[0].url} alt={song.name} className="footer-song-logo" />
+            <div className="footer-song-info">
+              <h5>{song.name}</h5>
+              <p>{song.artists.map((artist: any) => artist.name).join(', ')}</p>
             </div>
+          </>
+        ) : (
+          <div className="footer-song-info">
+            <h5>No track selected</h5>
+          </div>
+        )}
+      </div>
             <div className="footer-controls">
                 <Shuffle className="footer-icon"/>
                 <ArrowLeftCircle className="footer-icon" />
