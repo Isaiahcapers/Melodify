@@ -1,7 +1,3 @@
-import React, { useState, useEffect } from 'react';
-import { useDataLayer } from '../DataLayer';
-import { redirect } from 'react-router-dom';
-
 export async function redirectToAuthCodeFlow(clientId: string) {
   const verifier = generateCodeVerifier(128);
   const challenge = await generateCodeChallenge(verifier);
