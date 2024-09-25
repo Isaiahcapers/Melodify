@@ -6,7 +6,7 @@ const playlist = () => {
   return (
     <div className="playlist">
       <div className="playlist-body">
-        <Sidebar />
+        <Sidebar title={''} />
         <Player />
         <Footer/>
       </div>

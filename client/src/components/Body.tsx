@@ -1,4 +1,3 @@
-import React,{useState,useEffect} from 'react';
 import '../CSS/Body.css';
 import Header from './Header';
 import Banner from '../assets/images/Melodify-Banner.webp'
@@ -13,6 +12,8 @@ interface BodyProps {
 function Body({tracks}: BodyProps) {
   const [{user,token},dispatch] = UseDataLayerValue();
  const onSelectTrack = (track: any) => {
+  console.log("Selected Track", onSelectTrack);
+  
     console.log(`Selected Track ID: ${track.id}`);
     dispatch({ type: "SET_PLAYING", playing: true });
     dispatch({ type: "SET_SELECTED_TRACK", selectedTrack: track }); // Dispatch the new action 
@@ -55,7 +56,7 @@ function Body({tracks}: BodyProps) {
       </div>
       <div className="body-playlist-area">
         {tracks?.map((item: { track: { id: string; name: string; artists: any[]; album: any } }) => (
-            <Tracks key={item.track.id} track={item.track} playSong={playSong} />
+            <Tracks key={item.track.id} track={item.track} playSong={playSong} onSelectTrack={onSelectTrack} />
         ))}
       </div>
       </div>

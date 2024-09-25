@@ -1,4 +1,4 @@
-import { useState,useEffect } from 'react';
+import { useState} from 'react';
 import '../CSS/Footer.css';
 import { Shuffle,PlayCircle,ArrowRightCircle,ArrowLeftCircle,ArrowClockwise,VolumeUp,VolumeDown,VolumeMute } from 'react-bootstrap-icons';
 import { UseDataLayerValue } from '../DataLayer';
@@ -6,7 +6,7 @@ import { UseDataLayerValue } from '../DataLayer';
 
 
 export default function Footer() {
-    const [{ song, token }, dispatch] = UseDataLayerValue();
+    const [{ song, token }] = UseDataLayerValue();
 
 console.log("footer",song);
 console.log("footer",token);

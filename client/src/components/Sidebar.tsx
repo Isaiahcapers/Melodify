@@ -6,11 +6,21 @@ import { House, Search } from 'react-bootstrap-icons';
 import { UseDataLayerValue } from "../DataLayer";
 
 interface SidebarProps {
-  onSelectPlaylist: (id?: string) => void;
+
+  id?:string;
+
+  title: string;
+
+  Icon?: React.ComponentType;
+
+  image?: string;
+
+  onSelectPlaylist?: (id: string) => void;
+
 }
 
 const Sidebar: React.FC <SidebarProps>= ({onSelectPlaylist}) => {
-  const [{ playlists, token }, dispatch] = UseDataLayerValue();
+  const [{token }, dispatch] = UseDataLayerValue();
   // console.log("sidebar has acess to playlist",playlists);
   // console.log("sidebar has access to the token",token);
   
@@ -62,13 +72,16 @@ const Sidebar: React.FC <SidebarProps>= ({onSelectPlaylist}) => {
         // console.log("playlist id", playlist.id);
         return (
           <SidebarList 
-            key={playlist.id}
-            id={playlist.id} 
-            title={playlist.name} 
-            image={playlist.images[0]?.url} 
-            onSelectPlaylist={onSelectPlaylist} 
-            
-          />
+  key={playlist.id}
+  id={playlist.id} 
+  title={playlist.name} 
+  image={playlist.images[0]?.url} 
+  onSelectPlaylist={(id?: string) => {
+    if (onSelectPlaylist && id) {
+      onSelectPlaylist(id);
+    }
+  }}
+/>
         );
       })}
     </div>

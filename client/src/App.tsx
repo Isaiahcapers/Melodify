@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react';
 import { Routes, Route } from "react-router-dom";
 import Navbar from './components/Navigation'; 
 import Login from './pages/Login'; 
@@ -16,7 +15,7 @@ const App: React.FC = () => {
   const handleRegisterSuccess = () => {
     window.location.href = "/login"; // Redirect to login page after successful registration
   };
-  const [{user,token,playlists}, dispatch] = UseDataLayerValue();
+  const [{playlists}] = UseDataLayerValue();
 // console.log("App page has access to the user",user);
 // console.log("App page has access to the token",token);
 console.log("App page has access to the playlist",playlists);

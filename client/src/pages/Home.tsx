@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import {UseDataLayerValue } from '../DataLayer';
 import '../CSS/Home.css';
-import { fetchProfile,redirectToAuthCodeFlow,getAccessToken,populateUI } from '../components/authUtils';
+import { fetchProfile,redirectToAuthCodeFlow,getAccessToken } from '../components/authUtils';
 import Sidebar from '../components/Sidebar';
 import Body from '../components/Body';
 import Footer from '../components/Footer';
@@ -79,7 +79,7 @@ const Home = () => {
   return (
     <div className="home">
     <div className="home-body">
-      <Sidebar onSelectPlaylist={ onSelectPlaylist} />
+      <Sidebar onSelectPlaylist={onSelectPlaylist} title={''} />
       <Body tracks={tracks}/>
       <Footer />
     </div>

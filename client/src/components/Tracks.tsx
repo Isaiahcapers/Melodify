@@ -22,7 +22,7 @@ interface TracksProps {
   onSelectTrack: (track: Track) => void;
 }
 
-const Tracks: React.FC<TracksProps> = ({ track, playSong, onSelectTrack }) => {
+const Tracks: React.FC<TracksProps> = ({ track, playSong}) => {
   
   // console.log("Tracks");
 

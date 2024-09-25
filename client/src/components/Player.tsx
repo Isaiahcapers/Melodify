@@ -1,10 +1,8 @@
 import "../CSS/Player.css";
-import React, { useState, useEffect } from "react";
 import { UseDataLayerValue } from '../DataLayer';
 
 const Player = () => {
     const [{song}] = UseDataLayerValue();
-    const [player, setPlayer] = useState(undefined);
 
 
     
@@ -18,7 +16,7 @@ const Player = () => {
                 <div className="player-info">
                     <h1>{song?.name}</h1>
                     <p>
-                        {song?.artists.map((artist) => artist.name).join(", ")} -{" "}
+                        {song?.artists.map((artist: { name: string }) => artist.name).join(", ")} -{" "}
                         {song?.album.name}
                     </p>
                 </div>

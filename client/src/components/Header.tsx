@@ -1,11 +1,9 @@
-import React from "react";
 import "../CSS/Header.css";
 import { UseDataLayerValue } from "../DataLayer";
 import { Search, House } from "react-bootstrap-icons";
-import logo from "../assets/images/melodify-logo2.png";
 
 function Header() {
-  const [{ user }, dispatch] = UseDataLayerValue();
+  const [{ user }] = UseDataLayerValue();
   // console.log(user);
 
   return (
