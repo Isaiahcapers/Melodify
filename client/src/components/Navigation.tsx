@@ -1,7 +1,7 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import '../CSS/Navigation.css';
 import { useEffect, useState } from "react";
-import logo from '../assets/images/melodify-logo2.png';
+import logo from '../images/melodify-logo2.png';
 interface NavigationLinks {
   to: string;
   pageTitle: string;
