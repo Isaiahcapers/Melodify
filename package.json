@@ -13,9 +13,8 @@
     "client:build": "cd client && npm run build",
     "client:dev": "cd client && npm run dev",
     "server:build": "cd server && npm run build",
-    "seed": "cd server && npm run seed",
     "render-build": "npm install && npm run client:build && npm run server:build",
-    "render-start": "npm run seed && npm run start"
+    "render-start": "npm run start"
   },
   "keywords": [],
   "author": "",
