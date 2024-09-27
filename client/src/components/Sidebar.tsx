@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import "../CSS/Sidebar.css";
-import image1 from "../assets/images/melodify-logo2.png";
+import image1 from "../images/melodify-logo2.png";
 import SidebarList from "./sidebarlist";
 import { House, Search } from 'react-bootstrap-icons';
 import { UseDataLayerValue } from "../DataLayer";

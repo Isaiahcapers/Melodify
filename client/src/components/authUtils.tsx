@@ -8,7 +8,7 @@ export async function redirectToAuthCodeFlow(clientId: string) {
   const params = new URLSearchParams();
   params.append("client_id", clientId);
   params.append("response_type", "code");
-  params.append("redirect_uri", "http://localhost:3000/");
+  params.append("redirect_uri", import.meta.env.VITE_REDIRECT_URI);
   params.append("scope", "user-read-private user-read-email user-read-playback-state  user-read-currently-playing user-read-recently-played user-modify-playback-state user-top-read playlist-read-private playlist-read-collaborative playlist-modify-private playlist-modify-public");
   params.append("code_challenge_method", "S256");
   params.append("code_challenge", challenge);
@@ -63,7 +63,7 @@ export async function getAccessToken(clientId: string, code: string) {
     params.append("client_id", clientId);
     params.append("grant_type", "authorization_code");
     params.append("code", code);
-    params.append("redirect_uri", "http://localhost:3000/");
+    params.append("redirect_uri", import.meta.env.VITE_REDIRECT_URI);
     params.append("code_verifier", verifier!);
     console.log(params);
 
