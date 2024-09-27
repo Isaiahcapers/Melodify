@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import LoginForm from "../components/LoginForm";
 import RegisterForm from "../components/RegisterForm";
 import "../CSS/Login.css"; // CSS for styling
-import image1 from "../images/melodify-logo2.png";
+import image1 from "../assets/images/melodify-logo2.png";
 
 import {
   Chart,
