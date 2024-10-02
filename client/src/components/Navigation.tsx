@@ -1,7 +1,7 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import '../CSS/Navigation.css';
 import { useEffect, useState } from "react";
-
+import logo from '../assets/images/melodify-logo2.png';
 interface NavigationLinks {
   to: string;
   pageTitle: string;
@@ -56,7 +56,7 @@ export default function Navigation() {
   return (
     <nav className="nav-bar">
       <div className="nav-logo">
-        <img src="/src/assets/images/melodify-logo2.png" alt="Melodify Logo" />
+        <img src={logo} alt="Melodify Logo" />
       </div>
 
       <ul className="nav-css">
