@@ -66,3 +66,9 @@ height: 70px;
     margin-right: 10px;
     object-fit: contain;
 }
+
+@media only screen and (max-width: 464px) {
+    .sidebar {
+        display: none;
+    }
+}

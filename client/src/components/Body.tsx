@@ -48,6 +48,9 @@ function Body({tracks}: BodyProps) {
       <div className="body-banner">
       <Header />
       <div className="banner">
+        <div>
+          
+        </div>
         <img src={Banner} alt="Banner" className="banner-img"/>
         <div className="banner-message">
          <h2>Welcome, {user?.display_name} </h2>
