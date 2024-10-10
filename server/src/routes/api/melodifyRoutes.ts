@@ -14,13 +14,15 @@ interface SpotifyTokenResponse {
  */
 router.get('/auth', (_req, res) => {
   const client_id = process.env.SPOTIFY_CLIENT_ID;
-  const redirect_url = process.env.SPOTIFY_REDIRECT_URL;
+  const redirect_uri = process.env.SPOTIFY_REDIRECT_URI;
+  console.log(process.env);
+  
 
-  if (!client_id || !redirect_url) {
+  if (!client_id || !redirect_uri) {
     return res.status(500).json({ message: 'Server misconfiguration: Missing client_id or redirect_url' });
   }
 
-  const authURL = `https://accounts.spotify.com/authorize?client_id=${client_id}&response_type=code&redirect_uri=${encodeURIComponent(redirect_url)}&scope=user-read-private`;
+  const authURL = `https://accounts.spotify.com/authorize?client_id=${client_id}&response_type=code&redirect_uri=${encodeURIComponent(redirect_uri)}&scope=user-read-private`;
   return res.redirect(authURL);
 });
 

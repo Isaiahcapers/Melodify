@@ -44,10 +44,13 @@ function Body({tracks}: BodyProps) {
 
 
   return (
-    <div className ="body">
-      <div className="body-banner">
+    <div className ="page">
+      <div>
       <Header />
       <div className="banner">
+        <div>
+          
+        </div>
         <img src={Banner} alt="Banner" className="banner-img"/>
         <div className="banner-message">
          <h2>Welcome, {user?.display_name} </h2>

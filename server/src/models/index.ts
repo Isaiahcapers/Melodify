@@ -1,8 +1,8 @@
 // Remove this line if you're not using 'authRoutes' in this file
 // import { authRoutes } from '../routes/api/authRoutes'; // Remove this if unused
 
-import { sequelize } from '../config/connection';
-import { User } from './user';
+import { sequelize } from '../config/connection.js';
+import { User } from './user.js';
 
 // Initialize models or do other necessary setups here
 

@@ -1,10 +1,9 @@
 import express from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import { User } from '../models/index.js'
 
 const router = express.Router();
-
-const users: { [key: string]: { password: string } } = {};
 
 // Registration route
 router.post('/register', async (req, res) => {
@@ -17,9 +16,10 @@ router.post('/register', async (req, res) => {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    users[username] = { password: hashedPassword };
+    await User.create({username, email, password: hashedPassword})
+    const token = jwt.sign({ username }, process.env.JWT_SECRET || 'secret_key', { expiresIn: '1h' });
+    return res.status(201).json({ token });
 
-    return res.status(201).json({ message: 'User registered successfully' });
   } catch (error) {
     return res.status(500).json({ message: 'Internal server error' });
   }
@@ -30,7 +30,8 @@ router.post('/login', async (req, res) => {
   try {
     const { username, password } = req.body;
 
-    const user = users[username];
+    const user = await User.findOne({ where: { username } });
+
     if (!user || !(await bcrypt.compare(password, user.password))) {
       return res.status(401).json({ message: 'Invalid credentials' });
     }

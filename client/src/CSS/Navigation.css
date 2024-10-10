@@ -83,3 +83,28 @@ body {
         align-items: center;
     }
 }
+
+@media only screen and (max-width: 464px) {
+    .nav-bar {
+        display: flex;
+        flex-direction: column;
+        height: 20rem;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .nav-logo {
+        display: flex;
+        margin-top: 0;
+    }
+    .nav-css {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+    #melodifyUsername {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+
