@@ -43,63 +43,6 @@ console.log("footer",token);
         }
     };
 
-
-    // async function handlePlayPause() {
-    //     if (token) {
-    //         const data = await getCurrentlyPlaying();
-    //         if (data.is_playing) {
-    //             const response = await fetch("https://api.spotify.com/v1/me/player/pause", {
-    //                 method: "PUT",
-    //                 headers: {
-    //                     Authorization: `Bearer ${token}`
-    //                 }
-    //             });
-    //             if (response.status === 204) {
-    //                 dispatch({ type: 'SET_GLOBAL_IS_TRACK_PLAYING', globalIsTrackPlaying: false });
-    //             }
-    //         } else {
-    //             const response = await fetch("https://api.spotify.com/v1/me/player/play", {
-    //                 method: "PUT",
-    //                 headers: {
-    //                     Authorization: `Bearer ${token}`
-    //                 }
-    //             });
-    //             if (response.status === 204) {
-    //                 dispatch({ type: 'SET_GLOBAL_IS_TRACK_PLAYING', globalIsTrackPlaying: true });
-    //                 dispatch({ type: 'SET_GLOBAL_CURRENT_SONG_ID', globalCurrentSongId: data.item.id });
-    //             }
-    //         }
-    //     }
-    // }
-
-    // async function playSong(song: { id: string; uri: string }) {
-    //     // const getDeviceId = await fetch("https://api.spotify.com/v1/me/player/devices", {
-    //     //     method: "GET",
-    //     //     headers: {
-    //     //       Authorization: `Bearer ${token}`
-    //     //     },
-    //     //     });
-    //     //     const data = await getDeviceId.json();
-    //     //     const deviceId = data.devices[0].id;
-    //     //     // console.log("device id", deviceId);
-            
-
-    //       const response = await fetch(`https://api.spotify.com/v1/me/player/play?`, {
-    //         method: "PUT",
-    //         headers: {
-    //           Authorization: `Bearer ${token}`
-    //         },
-    //         body: JSON.stringify({
-    //           uris: [song.uri]
-    //         })
-    //       });
-    //       console.log("on play", response.status);
-    //     }
-    
-
-
-    
-
     return (
         <footer className="footer">
             <div className="footer-details">

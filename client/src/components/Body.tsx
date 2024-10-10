@@ -44,8 +44,8 @@ function Body({tracks}: BodyProps) {
 
 
   return (
-    <div className ="body">
-      <div className="body-banner">
+    <div className ="page">
+      <div>
       <Header />
       <div className="banner">
         <div>
