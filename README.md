@@ -8,22 +8,33 @@ Currently, two official plugins are available:
 
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+=======
+Melodify is a music playlist management application that allows users to create, manage, and play their favorite playlists.
+
+## Table of Contents
+
 - [Features](#features)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
 - [License](#license)
 
+
 ## Expanding the ESLint configuration
 ## Features
 
 If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+=======
+## Features
+
 - Create and manage playlists
 - Add and remove songs from playlists
 - Play songs directly from the application
 - User authentication and profile management
 
 - Configure the top-level `parserOptions` property like this:
+=======
+
 ## Installation
 
 To get started with Melodify, follow these steps:
@@ -66,26 +77,3 @@ export default tseslint.config({
 })
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
