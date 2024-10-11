@@ -10,7 +10,6 @@ const playlist = () => {
         <Player />
         <Footer/>
       </div>
-      <h1>Playlist</h1>
     </div>
   );
 };
