@@ -30,7 +30,7 @@
 .footer-volume{
     flex: 30%;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     color: white;
     padding: 0 10px;
     font-size: 1.2em;
@@ -137,12 +137,35 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        height: 200px;
+        height: 18rem;
     }
     .footer-details {
         display: flex;
-        margin-top: 1rem;
-        justify-content: center;
+        flex-direction: column;
+        padding: 0;
+        margin-top: 1.4rem;
+        font-size: 1.4rem;
+    }
+    .footer-controls {
+        display: flex;
+        padding: 0;
+        font-size: 1.8rem;
+    }
+    .footer-volume {
+        display: flex;
+        padding: 0;
+        font-size: 1.8rem;
+    }
 
+    .api-button {
+        width: 100%;
+        margin-top: 0;
+        margin-bottom: 1rem;
+    }
+    .haiku-title {
+        margin-top: 0;
+    }
+    .submit-button {
+        margin-bottom: 2.5rem;
     }
 }

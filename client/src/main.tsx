@@ -1,6 +1,6 @@
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
-import "./index.css";
+import './CSS/Body.css';
 
 import App from "./App";
 import Error from "./pages/ErrorPage";

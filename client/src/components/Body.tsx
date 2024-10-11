@@ -53,8 +53,8 @@ function Body({tracks}: BodyProps) {
         </div>
         <img src={Banner} alt="Banner" className="banner-img"/>
         <div className="banner-message">
-         <h2>Welcome, {user?.display_name} </h2>
-       <p>Pick a Playlist & Melodify</p> 
+         <h2 className='WelcomeMessage'>Welcome, {user?.display_name} </h2>
+       <p className='PlaylistMessage'>Pick a Playlist & Melodify</p> 
         </div>
       </div>
       <div className="body-playlist-area">
