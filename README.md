@@ -33,6 +33,9 @@ If you are developing a production application, we recommend updating the config
 - User authentication and profile management
 
 - Configure the top-level `parserOptions` property like this:
+
+![Home Page](client/src/assets/images/melodfiy-home.png)
+
 =======
 
 ## Installation
