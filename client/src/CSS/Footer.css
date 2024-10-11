@@ -1,5 +1,4 @@
 .footer {
-    position: fixed;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -131,4 +130,19 @@
     margin-top: 5px;
     font-size: 12px;
     text-align: center;
+}
+
+@media only screen and (max-width: 768px) {
+    .footer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 200px;
+    }
+    .footer-details {
+        display: flex;
+        margin-top: 1rem;
+        justify-content: center;
+
+    }
 }

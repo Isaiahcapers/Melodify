@@ -71,11 +71,12 @@ export default function Navigation() {
         ))}
         {isLoggedIn ? (
           <>
-            <li className="nav-button">
+          
+            <li className="nav-button" id="melodifyUsername">
               {/* Display the logged-in user's username */}
               <span>Welcome, {username}!</span>
             </li>
-            <li className="nav-button">
+            <li className="nav-button" id="melodifySignOut">
               <button onClick={handleLogout}>Sign Out</button>
             </li>
           </>

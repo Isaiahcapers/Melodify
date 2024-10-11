@@ -78,11 +78,15 @@ const Home = () => {
 
   return (
     <div className="home">
+      
     <div className="home-body">
+
       <Sidebar onSelectPlaylist={onSelectPlaylist} title={''} />
       <Body tracks={tracks}/>
-      <Footer />
+     
     </div>
+
+    <Footer />
     </div>
   );
 };
