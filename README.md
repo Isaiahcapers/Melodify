@@ -9,21 +9,12 @@ Melodify is a music playlist management application that allows users to create,
 - [Contributing](#contributing)
 - [License](#license)
 
-
-## Expanding the ESLint configuration
-## Features
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-=======
 ## Features
 
 - Create and manage playlists
 - Add and remove songs from playlists
 - Play songs directly from the application
 - User authentication and profile management
-
-- Configure the top-level `parserOptions` property like this:
-=======
 
 ## Installation
 
@@ -59,11 +50,4 @@ The Sidebar component is used to display the list of playlists. It accepts the f
 
 - `onSelectPlaylist`: A function that is called when a playlist is selected. The function receives the playlist ID as an argument.
 
-Example usage:
-
-```js
-export default tseslint.config({
-@@ -25,26 +65,3 @@ export default tseslint.config({
-})
-```
 
