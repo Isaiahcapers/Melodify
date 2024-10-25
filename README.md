@@ -1,5 +1,4 @@
 # Melodify
-=======
 Melodify is a music playlist management application that allows users to create, manage, and play their favorite playlists.
 
 ## Table of Contents
