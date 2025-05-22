@@ -76,36 +76,41 @@ button:focus-visible {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  text-align: center;
   color: white;
 }
 
 @media only screen and (max-width: 464px) {
-  .body {
+  .page {
     display: flex;
     justify-content: center;
-    height: 33rem;
-    padding-bottom: 5rem;
-    padding-top: 0;
+    padding: 0;
+    height: 43rem;
   }
   .banner {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 2rem;
-    width: 21rem;
     flex-direction: column;
+    margin-top: 2rem;
+    width: 20rem;
   }
   .banner-img {
     display: flex;
-
     border-radius: 2rem;
   }
 
   .banner-message {
     display: flex;
+    width: 20.1rem;
     flex-direction: column;
     justify-content: center;
+    margin-top: 0;
+  }
+  .WelcomeMessage {
+    margin-top: 12px;
+    margin-bottom: 9px;
+  }
+  .PlaylistMessage {
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
   }
 }

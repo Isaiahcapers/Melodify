@@ -6,7 +6,6 @@ import ProtectedRoute from './components/ProtectedRoute';
 import HomePage from './pages/Home'; 
 import Playlist from './pages/Playlist';
 import MelodifyCallback from './pages/MelodifyCallback';
-import './App.css';
 import Home from './pages/Home';
 import { UseDataLayerValue } from './DataLayer';
 
@@ -16,8 +15,7 @@ const App: React.FC = () => {
     window.location.href = "/login"; // Redirect to login page after successful registration
   };
   const [{playlists}] = UseDataLayerValue();
-// console.log("App page has access to the user",user);
-// console.log("App page has access to the token",token);
+
 console.log("App page has access to the playlist",playlists);
 
 
